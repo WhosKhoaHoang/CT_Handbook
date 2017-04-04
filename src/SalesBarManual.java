@@ -44,7 +44,9 @@ import net.miginfocom.swing.MigLayout;
 public class SalesBarManual extends JPanel {  //Ultimately, you will probably have this inherit from JPanel?
 	
 	//java.net.URL url = ClassLoader.getSystemResource("images/ct_logo.png"); //Code for changing desktop icon?
-		
+
+	private static final long serialVersionUID = 1L; //Eclipses suggested this...
+
 	//private JFrame frame = new JFrame();
 	private JPanel mainScreen = new JPanel(); //Should I just use "this" instead of mainScreen?
 	
@@ -91,6 +93,8 @@ public class SalesBarManual extends JPanel {  //Ultimately, you will probably ha
 	 * Creates a new SalesBarManual.
 	 */
 	public SalesBarManual() {	
+		
+		//I think I need to call super()....
 		
 		/*
 		//Set border for frame (the top level container)
@@ -284,7 +288,7 @@ public class SalesBarManual extends JPanel {  //Ultimately, you will probably ha
 	
 	
 	/**
-	 * A helper method that adds buttons to the main menu.
+	 * A helper method that adds buttons to the main menu in groups of three columns.
 	 */
 	private void addMainMenuBtns() {
 		for (int i = 0, curCol = 0; i < mainMenuBtns.size(); i++, curCol++) {
