@@ -90,9 +90,7 @@ public class SalesBarManual extends JPanel {  //Ultimately, you will probably ha
 	 */
 	public SalesBarManual(final JPanel backMenuScreen, final CardLayout backMenuScreenCl) {	
 		
-		//I think I need to call super()....
-		super();
-		
+		super();		
 		setLayout(mainScreenCl);	
 		add(mainMenu, "main_menu_screen");
 		add(newRepDia, "new_repair_dialogue_screen");
@@ -120,7 +118,7 @@ public class SalesBarManual extends JPanel {  //Ultimately, you will probably ha
 		header.setBackground(Color.decode("0x026937"));
 		header.setLayout(new MigLayout());
 		
-		JLabel headerLbl = new JLabel("SALES BAR OPERATIONS");
+		JLabel headerLbl = new JLabel("CUSTOMER PROCEDURES");
 		headerLbl.setFont(new Font("Helvetica", Font.BOLD, 25));
 		headerLbl.setForeground(Color.WHITE);
 		
@@ -141,6 +139,8 @@ public class SalesBarManual extends JPanel {  //Ultimately, you will probably ha
 		btnArea.setBackground(Color.WHITE);
 		mainMenu.add(btnArea, "center, push, growy");		
 		addMainMenuBtns();
+		JScrollPane scrollPane = new JScrollPane(btnArea);
+		mainMenu.add(scrollPane, "push, grow");
 		
 		
 		// === NEW REPAIR DIALOGUE SCREEN CONFIGURATIONS ===
@@ -233,6 +233,7 @@ public class SalesBarManual extends JPanel {  //Ultimately, you will probably ha
 		createHeader("PICK UP SIGNATURE", pUSig);
 		fillBasicContent("screen_content/pickup_sig.html", pUSig);
 		addTextToCBBtn(pUSig);
+		
 		
 	}
 

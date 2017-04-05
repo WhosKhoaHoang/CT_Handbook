@@ -38,7 +38,6 @@ public class OpsMenu extends JPanel {
 		//Establish cards 
 		add(content, "ops_main_screen");
 		menuScreenCl.show(this, "ops_main_screen");
-		
 	}
 	
 	
