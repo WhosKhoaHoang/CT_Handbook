@@ -1,3 +1,4 @@
+import javax.swing.*;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -6,9 +7,7 @@ import java.awt.Insets;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
-import javax.swing.*;
-
+import org.jdesktop.swingx.border.DropShadowBorder;
 import net.miginfocom.swing.MigLayout;
 
 public class CTHandbook {
@@ -16,29 +15,38 @@ public class CTHandbook {
 	final int PREF_HEIGHT = 500;
 	
 	private JFrame frame = new JFrame(); //Serves as the "root" window
-	private JPanel mainScreen = new JPanel(); //Put this on frame
+	private JPanel homeScreen = new JPanel(); //Put this on frame
 	
 	private JPanel logo = new CTLogo();
-	private JPanel mainMenu = new JPanel();
+	private JPanel homeMenu = new JPanel();
 	
 	private JButton managerBtn = new JButton("Manager");
 	private JButton salesBarBtn = new JButton("Sales Bar");
 	private JButton technicianBtn = new JButton("Technician");
 	
-	private CardLayout mainScreenCl = new CardLayout(); 
+	private CardLayout homeScreenCl = new CardLayout(); 
 	
 	
 	public CTHandbook() {
+		
+        DropShadowBorder shadow = new DropShadowBorder();
+        shadow.setShadowColor(Color.BLACK);
+        shadow.setShowLeftShadow(true);
+        shadow.setShowRightShadow(true);
+        shadow.setShowBottomShadow(true);
+        shadow.setShowTopShadow(true);
+        frame.getRootPane().setBorder(shadow);
+        
 		//For proper looking buttons:
 		try { UIManager.setLookAndFeel( UIManager.getCrossPlatformLookAndFeelClassName() ); } 
 		catch (Exception e) { e.printStackTrace(); }
 		
-		mainScreen.setLayout(mainScreenCl);
-		mainScreen.add(mainMenu, "main_menu");
-		mainScreen.add(new ManagerOps(mainScreen, mainScreenCl), "manager_menu");
-		mainScreen.add(new SalesBarOps(mainScreen, mainScreenCl), "sales_bar_menu");
-		mainScreen.add(new TechnicianOps(mainScreen, mainScreenCl), "technician_menu");
-		mainScreenCl.show(mainScreen, "main_menu");
+		homeScreen.setLayout(homeScreenCl);
+		homeScreen.add(homeMenu, "home_menu");
+		homeScreen.add(new ManagerOps(homeScreen, homeScreenCl), "manager_menu");
+		homeScreen.add(new SalesBarOps(homeScreen, homeScreenCl), "sales_bar_menu");
+		homeScreen.add(new TechnicianOps(homeScreen, homeScreenCl), "technician_menu");
+		homeScreenCl.show(homeScreen, "main_menu");
 
 		
 		
@@ -54,45 +62,45 @@ public class CTHandbook {
 		managerBtn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				mainScreenCl.show(mainScreen, "manager_menu");
+				homeScreenCl.show(homeScreen, "manager_menu");
 			}
 		});
 		salesBarBtn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				mainScreenCl.show(mainScreen, "sales_bar_menu");
+				homeScreenCl.show(homeScreen, "sales_bar_menu");
 			}
 		});
 		technicianBtn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				mainScreenCl.show(mainScreen, "technician_menu");
+				homeScreenCl.show(homeScreen, "technician_menu");
 			}
 		});
 		
 		
 		
 		// === MAIN MENU CONFIGURATIONS ===
-		mainMenu.setBackground(Color.WHITE);
-		mainMenu.setLayout(new MigLayout("align 50% 50%, gapy 10"));
-		mainMenu.add(logo, "wrap, center");		
+		homeMenu.setBackground(Color.WHITE);
+		homeMenu.setLayout(new MigLayout("align 50% 50%, gapy 10"));
+		homeMenu.add(logo, "wrap, center");		
 		JPanel btnArea = new JPanel();
 		btnArea.setBackground(Color.WHITE);
 		btnArea.setLayout(new MigLayout());
 		btnArea.add(managerBtn);
 		btnArea.add(salesBarBtn);
 		btnArea.add(technicianBtn);
-		mainMenu.add(btnArea, "wrap");
+		homeMenu.add(btnArea, "wrap");
 		//3-Point Team???
 		JButton tPt = new JButton("3-Point Team");
-		mainMenu.add(tPt, "center");
+		homeMenu.add(tPt, "center");
 		
 		
 		
 		// === JFRAME CONFIGRATIONS ===
 	    frame.getContentPane().setPreferredSize(new Dimension(PREF_WIDTH, PREF_HEIGHT)); //HARD-CODED DIMENSIONS
 		//Boiler-plate Code:
-		frame.add(mainScreen);
+		frame.add(homeScreen);
 		frame.pack();
 		//Be sure to write the following two lines AFTER you've packed the frame. Writing them before packing
 		//doesn't center the GUI correctly!

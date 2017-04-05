@@ -9,9 +9,7 @@ import javax.swing.border.EtchedBorder;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.html.HTMLDocument;
 import javax.swing.text.html.HTMLEditorKit;
-
 import org.jdesktop.swingx.border.DropShadowBorder;
-
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -31,7 +29,6 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
 import net.miginfocom.swing.MigLayout;
 
 //TODO: Encapsulate code
@@ -44,15 +41,13 @@ import net.miginfocom.swing.MigLayout;
 public class SalesBarManual extends JPanel {  //Ultimately, you will probably have this inherit from JPanel?
 	
 	//java.net.URL url = ClassLoader.getSystemResource("images/ct_logo.png"); //Code for changing desktop icon?
-
 	private static final long serialVersionUID = 1L; //Eclipses suggested this...
 
 	//private JFrame frame = new JFrame();
-	private JPanel mainScreen = new JPanel(); //Should I just use "this" instead of mainScreen?
+	//private JPanel mainScreen = new JPanel(); //Should I just use "this" instead of mainScreen? YEZ.
+	private SalesBarManual curPage = this;
 	
 	private JPanel mainMenu = new JPanel();
-	private JLabel opManualTxt = new JLabel("Sales Bar Operations");
-	private JPanel logo = new CTLogo();
 	private JPanel btnArea = new JPanel();
 	
 	private JPanel newRepDia = new JPanel();
@@ -89,62 +84,63 @@ public class SalesBarManual extends JPanel {  //Ultimately, you will probably ha
 	//Will use a CardLayout to handle screen changing. Note that mainScreenCl has a CardLayout, but mainMenu, which is a JPanel that is
 	//put onto the mainScreen JPanel, will have a MigLayout.
 	
+	
 	/**
 	 * Creates a new SalesBarManual.
 	 */
-	public SalesBarManual() {	
+	public SalesBarManual(final JPanel backMenuScreen, final CardLayout backMenuScreenCl) {	
 		
 		//I think I need to call super()....
+		super();
 		
-		/*
-		//Set border for frame (the top level container)
-        DropShadowBorder shadow = new DropShadowBorder();
-        shadow.setShadowColor(Color.BLACK);
-        shadow.setShowLeftShadow(true);
-        shadow.setShowRightShadow(true);
-        shadow.setShowBottomShadow(true);
-        shadow.setShowTopShadow(true);
-        frame.getRootPane().setBorder(shadow);
-        //frame.getRootPane().setBorder(BorderFactory.createMatteBorder(4, 4, 4, 4, Color.RED));        
-        */
+		setLayout(mainScreenCl);	
+		add(mainMenu, "main_menu_screen");
+		add(newRepDia, "new_repair_dialogue_screen");
+		add(walkinWO, "walkin_work_order_screen");
+		add(workCmpl, "work_completed_screen");
+		add(pickUpDia, "pickup_dialogue_screen");
+		add(cmpnyWO, "company_work_order_screen");
+		add(cusUpdate, "customers_update_screen");
+		add(apprDia, "approval_dialogue_screen");
+		add(dOSig, "drop_off_signature_screen");
+		add(cmplRpr, "complete_repair_screen");
+		add(repComDia, "repair_complete_dialogue_screen");
+		add(pUSig, "pickup_signature_screen");
+		mainScreenCl.show(this, "main_menu_screen"); 
+		addMainMenuBtnALs();
 		
-		//The following try/catch block is needed so that the GUI's look and feel appears similar 
-		//across different operating systems. Also, this will make your buttons look proper.
-		//try { UIManager.setLookAndFeel( UIManager.getCrossPlatformLookAndFeelClassName() ); } 
-		//catch (Exception e) { e.printStackTrace(); }
-		//^Commented this out because for the CTHandbook class, you already wrote this!
-		
-		//configScreens();
-		
-		// === MAIN MENU CONFIGURATIONS ===
-		//mainMenu.setBackground(Color.decode("0x121E31")); //for debugging
+		//Start configuring the main menu...
 		mainMenu.setBackground(Color.WHITE);
-		mainMenu.setLayout(new MigLayout("debug, align 50% 50%, gapy 10", "[center]"));
-		//. The first 50% after "align" establishes horizontal centering and the second 50% establishes vertical centering for
-		//   the group of all components
-		//. "gapy" establishes vertical spacing between components
-		//. The "[center]" value specifies one column (since the value is in the arg position for columns) with center-align components
-		
-		
-		// === MAIN MENU SCREEN CONFIGURATIONS ===
-		mainScreen.setLayout(mainScreenCl);
-		mainScreen.add(mainMenu, "main_menu_screen");
-		mainScreen.add(newRepDia, "new_repair_dialogue_screen");
-		mainScreen.add(walkinWO, "walkin_work_order_screen");
-		mainScreen.add(workCmpl, "work_completed_screen");
-		mainScreen.add(pickUpDia, "pickup_dialogue_screen");
-		mainScreen.add(cmpnyWO, "company_work_order_screen");
-		mainScreen.add(cusUpdate, "customers_update_screen");
-		mainScreen.add(apprDia, "approval_dialogue_screen");
-		mainScreen.add(dOSig, "drop_off_signature_screen");
-		mainScreen.add(cmplRpr, "complete_repair_screen");
-		mainScreen.add(repComDia, "repair_complete_dialogue_screen");
-		mainScreen.add(pUSig, "pickup_signature_screen");
+		//mainMenu.setLayout(new MigLayout("debug, align 50% 50%, gapy 10", "[center]"));
+		mainMenu.setLayout(new MigLayout());
 
-		mainScreenCl.show(mainScreen, "main_menu_screen"); 
-		//Make the main menu (labeled as "main_menu_screen") show up first as part of the Card Layout.
-						
 		
+		// === HEADER CONFIGURATIONS ===
+		JPanel header = new JPanel();
+		header.setBackground(Color.decode("0x026937"));
+		header.setLayout(new MigLayout());
+		
+		JLabel headerLbl = new JLabel("SALES BAR OPERATIONS");
+		headerLbl.setFont(new Font("Helvetica", Font.BOLD, 25));
+		headerLbl.setForeground(Color.WHITE);
+		
+		JButton backBtn = new JButton("Back to Main Menu");
+		backBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				backMenuScreenCl.show(backMenuScreen, "ops_main_screen");
+			}
+		});
+		
+		header.add(backBtn, "wrap");
+		header.add(headerLbl, "gaptop 10"); //HARD-CODED VALUE
+		mainMenu.add(header, "height 100, pushx, growx, wrap"); //HARD-CODED VALUE. Setting values for Header here.
+
+		
+		// === BUTTON AREA CONFIGURATIONS ===
+		btnArea.setLayout(new MigLayout());
+		btnArea.setBackground(Color.WHITE);
+		mainMenu.add(btnArea, "center, push, growy");		
+		addMainMenuBtns();
 		
 		
 		// === NEW REPAIR DIALOGUE SCREEN CONFIGURATIONS ===
@@ -154,7 +150,6 @@ public class SalesBarManual extends JPanel {  //Ultimately, you will probably ha
 		fillComponentContent("screen_content/new_repair_dialogue.html", newRepDia, "FOLLOW WALK-IN TEMPLATE", "walkin_work_order_screen");
 		
 		
-		
 		// === WALK-IN WORK ORDER CONFIGURATIONS ===
 		walkinWO.setBackground(Color.WHITE);
 		walkinWO.setLayout(new MigLayout());
@@ -162,23 +157,21 @@ public class SalesBarManual extends JPanel {  //Ultimately, you will probably ha
 		fillBasicContent("screen_content/walkinWO.html", walkinWO);
 		addTextToCBBtn(walkinWO);
 		
-		JPanel header = (JPanel)walkinWO.getComponent(0);
+		JPanel walkinWOheader = (JPanel)walkinWO.getComponent(0);
 		JButton backToNewRepDia = new JButton("Back to New Repairs Dialogue");
 		backToNewRepDia.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				mainScreenCl.show(mainScreen, "new_repair_dialogue_screen");
+				mainScreenCl.show(curPage, "new_repair_dialogue_screen");
 			}
 		});
-		header.add(backToNewRepDia, "cell 0 0");
+		walkinWOheader.add(backToNewRepDia, "cell 0 0");
 		
 		
-
 		// === WORK COMPLETE CONFIGURATIONS ===
 		workCmpl.setBackground(Color.WHITE);
 		workCmpl.setLayout(new MigLayout());
 		createHeader("WORK COMPLETED UPDATE", workCmpl);
 		fillComponentContent("screen_content/work_completed_text.html", workCmpl, "FOLLOW DIALOGUE FOR APPROVAL", "approval_dialogue_screen");
-
 		
 		
 		// === PICK-UP DIALOG CONFIGURATIONS ===
@@ -186,7 +179,6 @@ public class SalesBarManual extends JPanel {  //Ultimately, you will probably ha
 		pickUpDia.setLayout(new MigLayout());
 		createHeader("DIALOGUE FOR PICK-UP", pickUpDia);
 		fillComponentContent("screen_content/pickup_dialogue.html", pickUpDia, "FOLLOW PICK-UP SIGNATURE", "pickup_signature_screen");
-		
 		
 		
 		// === COMPANY WORK ORDER CONFIGURATIONS ===
@@ -197,7 +189,6 @@ public class SalesBarManual extends JPanel {  //Ultimately, you will probably ha
 		addTextToCBBtn(cmpnyWO);
 		
 		
-		
 		// === CUSTOMERS UPDATE CONFIGURATIONS ===
 		cusUpdate.setBackground(Color.WHITE);
 		cusUpdate.setLayout(new MigLayout());
@@ -205,13 +196,11 @@ public class SalesBarManual extends JPanel {  //Ultimately, you will probably ha
 		fillBasicContent("screen_content/customers_update_text.html", cusUpdate);
 		
 		
-		
 		// === APPROVAL DIALOG CONFIGURATIONS ===
 		apprDia.setBackground(Color.WHITE);
 		apprDia.setLayout(new MigLayout());
 		createHeader("DIALOGUE FOR APPROVAL", apprDia);
 		fillComponentContent("screen_content/approval_dialogue.html", apprDia, "FOLLOW CUSTOMER UPDATE TEXT", "customers_update_screen");
-		
 		
 		
 		// === DROP-OFF SIGNATURE CONFIGURATIONS ===
@@ -222,14 +211,12 @@ public class SalesBarManual extends JPanel {  //Ultimately, you will probably ha
 		addTextToCBBtn(dOSig);
 		
 		
-		
 		// === COMPLETE REPAIR CONFIGURATIONS ===
 		cmplRpr.setBackground(Color.WHITE);
 		cmplRpr.setLayout(new MigLayout());
 		createHeader("COMPLETE REPAIR TEXT", cmplRpr);
 		fillComponentContent("screen_content/complete_repair_text.html", cmplRpr, 
 				"FOLLOW DIALOGUE FOR REPAIR COMPLETION UPDATE", "repair_complete_dialogue_screen");
-		
 		
 		
 		// === REPAIR COMPLETE DIALOG CONFIGURATIONS ===
@@ -240,7 +227,6 @@ public class SalesBarManual extends JPanel {  //Ultimately, you will probably ha
 				"FOLLOW COMPLETE REPAIR", "complete_repair_screen");
 		
 		
-		
 		// === PICK-UP SIGNATURE CONFIGURATIONS ===
 		pUSig.setBackground(Color.WHITE);
 		pUSig.setLayout(new MigLayout());
@@ -248,41 +234,6 @@ public class SalesBarManual extends JPanel {  //Ultimately, you will probably ha
 		fillBasicContent("screen_content/pickup_sig.html", pUSig);
 		addTextToCBBtn(pUSig);
 		
-		
-		
-		// === CLEVERTECH LOGO CONFIGURATIONS ===
-		logo.setBackground(Color.WHITE);
-		mainMenu.add(logo, "wrap");
-		
-		
-		
-		// === OPERATIONS MANUAL TEXT CONFIGURATIONS===
-		opManualTxt.setFont(new Font("Impact", Font.PLAIN, 25));
-		opManualTxt.setForeground(Color.decode("0x8FC967"));
-		mainMenu.add(opManualTxt, "wrap");
-		
-		
-		
-		// === BUTTON AREA CONFIGURATIONS ===
-		btnArea.setLayout(new MigLayout());
-		btnArea.setPreferredSize(new Dimension(700, 300)); //HARD-CODED DIMENSIONS
-		//btnArea.setBackground(Color.decode("0x8FC967")); //For testing
-		//^If you decide to go with this green box look, you'll need to get rid of the empty space at the bottom.
-		//To accomplish this, you'll probably have to make the heights of the buttons a hard-coded value rather than 
-		//one that is dependent on the size of the green box. Moreover, you'll need to decrease the height of the box.
-		btnArea.setBackground(Color.WHITE);
-		mainMenu.add(btnArea);
-		
-		
-		//Add buttons inside btnArea...
-		addMainMenuBtns();
-		
-		// === CODE FOR HANDLING SCREEN CHANGING FROM THE MAIN MENU ===
-		addMainMenuBtnALs();
-		
-		
-		//ADD EVERYTHING to this SalesBarManual
-		this.add(mainScreen);
 	}
 
 	
@@ -319,68 +270,68 @@ public class SalesBarManual extends JPanel {  //Ultimately, you will probably ha
 	private void addMainMenuBtnALs() {
 		newRepDiaBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				mainScreenCl.show(mainScreen, "new_repair_dialogue_screen");
+				mainScreenCl.show(curPage, "new_repair_dialogue_screen");
 				//^Read this as: For mainScreen, show the (JPanel) component labeled as "new_repair_dialogue_screen"
 			}
 		});
 		
 		walkinWOBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				mainScreenCl.show(mainScreen, "walkin_work_order_screen");
+				mainScreenCl.show(curPage, "walkin_work_order_screen");
 			}
 		});
 		
 		workCmplBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				mainScreenCl.show(mainScreen, "work_completed_screen");
+				mainScreenCl.show(curPage, "work_completed_screen");
 			}
 		});
 		
 		pickUpDiaBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				mainScreenCl.show(mainScreen, "pickup_dialogue_screen");
+				mainScreenCl.show(curPage, "pickup_dialogue_screen");
 			}
 		});
 		
 		cmpnyWOBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				mainScreenCl.show(mainScreen, "company_work_order_screen");
+				mainScreenCl.show(curPage, "company_work_order_screen");
 			}
 		});
 		
 		cusUpdateBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				mainScreenCl.show(mainScreen, "customers_update_screen");
+				mainScreenCl.show(curPage, "customers_update_screen");
 			}
 		});
 		
 		apprDiaBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				mainScreenCl.show(mainScreen, "approval_dialogue_screen");
+				mainScreenCl.show(curPage, "approval_dialogue_screen");
 			}
 		});
 
 		dOSigBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				mainScreenCl.show(mainScreen, "drop_off_signature_screen");
+				mainScreenCl.show(curPage, "drop_off_signature_screen");
 			}
 		});
 		
 		cmplRprBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				mainScreenCl.show(mainScreen, "complete_repair_screen");
+				mainScreenCl.show(curPage, "complete_repair_screen");
 			}
 		});
 		
 		repComDiaBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				mainScreenCl.show(mainScreen, "repair_complete_dialogue_screen");
+				mainScreenCl.show(curPage, "repair_complete_dialogue_screen");
 			}
 		});
 		
 		pUSigBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				mainScreenCl.show(mainScreen, "pickup_signature_screen");
+				mainScreenCl.show(curPage, "pickup_signature_screen");
 			}
 		});
 		
@@ -425,7 +376,7 @@ public class SalesBarManual extends JPanel {  //Ultimately, you will probably ha
 		JButton backBtn = new JButton("Back to Main Menu");
 		backBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				mainScreenCl.show(mainScreen, "main_menu_screen");
+				mainScreenCl.show(curPage, "main_menu_screen");
 			}
 		});
 		
@@ -506,7 +457,7 @@ public class SalesBarManual extends JPanel {  //Ultimately, you will probably ha
 		JButton button = new JButton(btnTxt);
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				mainScreenCl.show(mainScreen, jumpToPgLbl);  //mainScreenCl and mainScreen must be referred to in this actionListener
+				mainScreenCl.show(curPage, jumpToPgLbl);  //mainScreenCl and mainScreen must be referred to in this actionListener
 			}
 		});
 		

@@ -11,33 +11,34 @@ import net.miginfocom.swing.MigLayout;
 
 public class OpsMenu extends JPanel {
 
-	private JPanel mainScreen;
-	private CardLayout mainScreenCl;
-	protected JPanel btnArea = new JPanel(); //should this be protected?
+	private static final long serialVersionUID = 1L; //Eclipses suggested this...
+	private JPanel homeScreen; //An OpsMenu link back to the home screen
+	private CardLayout homeScreenCl; //The home screen's CardLayout manager
+	private JPanel content = new JPanel();
 	
-	//private JPanel content = new JPanel();
+	protected JPanel btnArea = new JPanel(); //should this be protected?	
+	protected CardLayout menuScreenCl = new CardLayout(); 
 	
-	
-	public OpsMenu(String headerTitle, JPanel mainScreen, CardLayout mainScreenCl) {
+	public OpsMenu(String headerTitle, JPanel homeScreen, CardLayout homeScreenCl) {
 		
 		super(); //Establish functionalities of a JPanel...
-		this.mainScreen = mainScreen;
-		this.mainScreenCl = mainScreenCl;
+		this.homeScreen = homeScreen;
+		this.homeScreenCl = homeScreenCl;
 		setBackground(Color.WHITE);
-		setLayout(new MigLayout());
+		
+		//Set layouts:
+		setLayout(menuScreenCl);
+		content.setLayout(new MigLayout());
+		content.setBackground(Color.WHITE);
+		
+		//Create screen content:
 		createMenuHeader(headerTitle);
 		createBtnArea();
-	}
-	
-	
-	/**
-	 * A helper method that creates the button area for an OpsMenu
-	 */
-	private void createBtnArea() {
-		btnArea.setBackground(Color.WHITE);
-		btnArea.setLayout(new MigLayout("align 50%"));
-		JScrollPane btnAreaScroll = new JScrollPane(btnArea);
-		add(btnAreaScroll, "push, grow, wrap");
+		
+		//Establish cards 
+		add(content, "ops_main_screen");
+		menuScreenCl.show(this, "ops_main_screen");
+		
 	}
 	
 	
@@ -55,8 +56,7 @@ public class OpsMenu extends JPanel {
 		headerLbl.setFont(new Font("Helvetica", Font.BOLD, 30));
 		headerLbl.setForeground(Color.WHITE);
 		
-		JButton backBtn = new JButton("Back to Top Menu"); //Stlye this button differently!!!
-		//configButton(backBtn);
+		JButton backBtn = new JButton("Back to Home Menu");
 		backBtn.setFont(new Font("Arial", Font.BOLD, 12));
 		backBtn.setForeground(Color.WHITE);
 		backBtn.setBackground(Color.decode("0x026937"));
@@ -64,15 +64,26 @@ public class OpsMenu extends JPanel {
 		
 		backBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				mainScreenCl.show(mainScreen, "main_menu");
+				homeScreenCl.show(homeScreen, "home_menu");
 			}
 		});
 		
 		header.add(headerLbl, "wrap");
 		header.add(backBtn, "align center");
-		add(header, "height 100, pushx, growx, wrap"); //HARD-CODED VALUE. Setting values for Header here.
+		content.add(header, "height 100, pushx, growx, wrap"); //HARD-CODED VALUE. Setting values for Header here.
 	}
 
+	
+	/**
+	 * A helper method that creates the button area for an OpsMenu
+	 */
+	private void createBtnArea() {
+		btnArea.setBackground(Color.WHITE);
+		btnArea.setLayout(new MigLayout("align 50%"));
+		JScrollPane btnAreaScroll = new JScrollPane(btnArea);		
+		content.add(btnAreaScroll, "push, grow, wrap");
+	}
+	
 	
 	/**
 	 * A helper method that adds buttons to the operations menu.
