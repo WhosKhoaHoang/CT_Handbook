@@ -14,16 +14,18 @@ public class OpsMenu extends JPanel {
 	private static final long serialVersionUID = 1L; //Eclipses suggested this...
 	private JPanel homeScreen; //An OpsMenu link back to the home screen
 	private CardLayout homeScreenCl; //The home screen's CardLayout manager
-	private JPanel content = new JPanel();
+	private String homeScreenLbl;
+	protected JPanel content = new JPanel();
 	
 	protected JPanel btnArea = new JPanel(); //should this be protected?	
 	protected CardLayout menuScreenCl = new CardLayout(); 
 	
-	public OpsMenu(String headerTitle, JPanel homeScreen, CardLayout homeScreenCl) {
+	public OpsMenu(String headerTitle, JPanel homeScreen, CardLayout homeScreenCl, String homeScreenLbl) {
 		
 		super(); //Establish functionalities of a JPanel...
 		this.homeScreen = homeScreen;
 		this.homeScreenCl = homeScreenCl;
+		this.homeScreenLbl = homeScreenLbl;
 		setBackground(Color.WHITE);
 		
 		//Set layouts:
@@ -32,9 +34,9 @@ public class OpsMenu extends JPanel {
 		content.setBackground(Color.WHITE);
 		
 		//Create screen content:
-		createMenuHeader(headerTitle);
-		createBtnArea();
-		
+		//createMenuHeader(headerTitle); //Should this be specific to each OpsMenu instead? Yes!
+		//createBtnArea(); //Should this be specific to each OpsMenu instead? Yes!
+		 
 		//Establish cards 
 		add(content, "ops_main_screen");
 		menuScreenCl.show(this, "ops_main_screen");
@@ -47,7 +49,7 @@ public class OpsMenu extends JPanel {
 	 * @param headerTxt The text to put on the header
 	 * @param panel The JPanel representing the content screen (must be set with MigLayout)
 	 */
-	private void createMenuHeader(String headerTxt) {
+	protected void createMenuHeader(String headerTxt) {
 		JPanel header = new JPanel();
 		header.setBackground(Color.decode("0x026937"));
 		header.setLayout(new MigLayout("align 50% 50%"));
@@ -64,8 +66,9 @@ public class OpsMenu extends JPanel {
 		
 		backBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				homeScreenCl.show(homeScreen, "home_menu"); 
+				//homeScreenCl.show(homeScreen, "home_menu"); 
 				//^Perhaps the second argument here should be passed as a parameter to an OpsMenu?
+				homeScreenCl.show(homeScreen, homeScreenLbl); 
 			}
 		});
 		
@@ -78,7 +81,7 @@ public class OpsMenu extends JPanel {
 	/**
 	 * A helper method that creates the button area for an OpsMenu
 	 */
-	private void createBtnArea() {
+	protected void createBtnArea() {
 		btnArea.setBackground(Color.WHITE);
 		btnArea.setLayout(new MigLayout("align 50%"));
 		JScrollPane btnAreaScroll = new JScrollPane(btnArea);		

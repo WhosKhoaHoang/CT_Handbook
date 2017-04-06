@@ -27,7 +27,11 @@ public class ManagerOpsMenu extends OpsMenu {
 	OpsMenu curPage = this;
 	
 	public ManagerOpsMenu(JPanel mainScreen, CardLayout mainScreenCl) {
-		super("MANAGER OPERATIONS", mainScreen, mainScreenCl);
+		super("MANAGER OPERATIONS", mainScreen, mainScreenCl, "home_menu");
+		
+		createMenuHeader("MANAGER OPERATIONS"); //Should this be specific to each OpsMenu instead?
+		createBtnArea(); //Should this be specific to each OpsMenu instead?
+		
 		addMenuBtns(btnsLst);
 		addBtnALs();
 		

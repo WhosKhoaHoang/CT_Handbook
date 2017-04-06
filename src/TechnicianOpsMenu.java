@@ -22,7 +22,11 @@ public class TechnicianOpsMenu extends OpsMenu {
 	OpsMenu curPage = this;
 	
 	public TechnicianOpsMenu(JPanel mainScreen, CardLayout mainScreenCl) {
-		super("TECHNICIAN OPERATIONS", mainScreen, mainScreenCl);
+		super("TECHNICIAN OPERATIONS", mainScreen, mainScreenCl, "home_menu");
+		
+		createMenuHeader("TECHNICIAN OPERATIONS"); //Should this be specific to each OpsMenu instead?
+		createBtnArea(); //Should this be specific to each OpsMenu instead?
+		
 		addMenuBtns(btnsLst);
 		addBtnALs();
 		

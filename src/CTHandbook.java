@@ -10,9 +10,14 @@ import java.awt.event.ActionListener;
 import org.jdesktop.swingx.border.DropShadowBorder;
 import net.miginfocom.swing.MigLayout;
 
+//TODO: Consider changing hard-coded values!
+//TODO: Establish Event Listeners for selecting and copying text
+//TODO: Add Event Listeners for keyboard navigation
+//TODO: Change the program's desktop and dock (for Macs) icon
+
 public class CTHandbook {
 	final int PREF_WIDTH = 800;
-	final int PREF_HEIGHT = 500;
+	final int PREF_HEIGHT = 700;
 	
 	private JFrame frame = new JFrame(); //Serves as the "root" window
 	private JPanel homeScreen = new JPanel(); //Put this on frame

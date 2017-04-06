@@ -2,8 +2,8 @@ import java.awt.CardLayout;
 
 import javax.swing.JPanel;
 
-//TESTING FOR NOW
 public class CustomersUpdateContent extends MenuItemContent {
+	private static final long serialVersionUID = 1L;
 
 	public CustomersUpdateContent(JPanel backMenuScreen, CardLayout backMenuScreenCl) {
 		super(backMenuScreen, backMenuScreenCl);

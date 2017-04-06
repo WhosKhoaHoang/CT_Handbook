@@ -23,10 +23,15 @@ public class SalesBarOpsMenu extends OpsMenu {
 	OpsMenu curPage = this;
 	
 	public SalesBarOpsMenu(JPanel homeScreen, CardLayout homeScreenCl) {
-		super("SALES BAR OPERATIONS", homeScreen, homeScreenCl);
+		super("SALES BAR OPERATIONS", homeScreen, homeScreenCl, "home_menu");
+		
+		createMenuHeader("SALES BAR OPERATIONS"); //Should this be specific to each OpsMenu instead?
+		createBtnArea(); //Should this be specific to each OpsMenu instead?
+		
 		addMenuBtns(btnsLst);
 		addBtnALs();
 		
+
 		// =========== The different MenuItemContents that this SalesBarOpsMenu will transition to ===========
 		MenuItemContent openingStoreCLContent = new OpeningStoreCLContent(this, menuScreenCl);
 		MenuItemContent phoneCallProcContent = new PhoneCallProcContent(this, menuScreenCl);
