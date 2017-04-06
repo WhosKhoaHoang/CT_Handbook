@@ -43,17 +43,13 @@ public class CTHandbook {
 		
 		homeScreen.setLayout(homeScreenCl);
 		homeScreen.add(homeMenu, "home_menu");
-		homeScreen.add(new ManagerOps(homeScreen, homeScreenCl), "manager_menu");
-		homeScreen.add(new SalesBarOps(homeScreen, homeScreenCl), "sales_bar_menu");
-		homeScreen.add(new TechnicianOps(homeScreen, homeScreenCl), "technician_menu");
+		homeScreen.add(new ManagerOpsMenu(homeScreen, homeScreenCl), "manager_menu");
+		homeScreen.add(new SalesBarOpsMenu(homeScreen, homeScreenCl), "sales_bar_menu");
+		homeScreen.add(new TechnicianOpsMenu(homeScreen, homeScreenCl), "technician_menu");
 		homeScreenCl.show(homeScreen, "main_menu");
 
-		
-		
 		// === CLEVERTECH LOGO CONFIGURATIONS ===
 		logo.setBackground(Color.WHITE);
-		
-
 		
 		// === BUTTON CONFIGURATIONS ===
 		configButton(managerBtn);
@@ -78,8 +74,6 @@ public class CTHandbook {
 			}
 		});
 		
-		
-		
 		// === MAIN MENU CONFIGURATIONS ===
 		homeMenu.setBackground(Color.WHITE);
 		homeMenu.setLayout(new MigLayout("align 50% 50%, gapy 10"));
@@ -93,9 +87,8 @@ public class CTHandbook {
 		homeMenu.add(btnArea, "wrap");
 		//3-Point Team???
 		JButton tPt = new JButton("3-Point Team");
+		//configButton(tPt);
 		homeMenu.add(tPt, "center");
-		
-		
 		
 		// === JFRAME CONFIGRATIONS ===
 	    frame.getContentPane().setPreferredSize(new Dimension(PREF_WIDTH, PREF_HEIGHT)); //HARD-CODED DIMENSIONS
@@ -109,7 +102,6 @@ public class CTHandbook {
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.setVisible(true);
 	}
-	
 	
 	
 	/**
