@@ -27,7 +27,7 @@ public class OpsMenu extends JPanel {
 		setBackground(Color.WHITE);
 		
 		//Set layouts:
-		setLayout(menuScreenCl);
+		setLayout(menuScreenCl); //"this" is set with a CardLayout
 		content.setLayout(new MigLayout());
 		content.setBackground(Color.WHITE);
 		
@@ -38,6 +38,7 @@ public class OpsMenu extends JPanel {
 		//Establish cards 
 		add(content, "ops_main_screen");
 		menuScreenCl.show(this, "ops_main_screen");
+		//"ops_main_screen" is referenced in the MenuItemContent base class
 	}
 	
 	
@@ -63,7 +64,8 @@ public class OpsMenu extends JPanel {
 		
 		backBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				homeScreenCl.show(homeScreen, "home_menu");
+				homeScreenCl.show(homeScreen, "home_menu"); 
+				//^Perhaps the second argument here should be passed as a parameter to an OpsMenu?
 			}
 		});
 		

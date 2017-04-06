@@ -47,6 +47,7 @@ public class OfficeSuppliesCLContent extends MenuItemContent{
             String everything = sb.toString();
             content.setText(everything);
             
+            //Add a hyperlink listener!
             content.addHyperlinkListener(new HyperlinkListener() {
                 public void hyperlinkUpdate(HyperlinkEvent e) {
                     if (e.getEventType() == HyperlinkEvent.EventType.ACTIVATED) {
@@ -64,7 +65,6 @@ public class OfficeSuppliesCLContent extends MenuItemContent{
                     }
                 }
             });
-            
             
             br.close();         
         }

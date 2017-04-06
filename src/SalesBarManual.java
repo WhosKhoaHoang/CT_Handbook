@@ -34,7 +34,7 @@ import net.miginfocom.swing.MigLayout;
 //TODO: Add Event Listeners for keyboard navigation
 //TODO: Change the program's desktop and dock (for Macs) icon
 
-public class SalesBarManual extends JPanel {  //Ultimately, you will probably have this inherit from JPanel?
+public class SalesBarManual extends OpsMenu {  //Should this inherit from MenuItemContent instead?
 	
 	//java.net.URL url = ClassLoader.getSystemResource("images/ct_logo.png"); //Code for changing desktop icon?
 	private static final long serialVersionUID = 1L; //Eclipses suggested this...
@@ -64,7 +64,7 @@ public class SalesBarManual extends JPanel {  //Ultimately, you will probably ha
 	private JButton workCmplBtn = new JButton("WORK COMPLETED TEXT");
 	private JButton pickUpDiaBtn = new JButton("DIALOGUE FOR PICK UP");
 	private JButton cmpnyWOBtn = new JButton("COMPANY WORK ORDER");
-	private JButton cusUpdateBtn = new JButton("CUSTOMER UPDATE TEXT");
+	private JButton cusUpdateBtn = new JButton("CUSTOMERS UPDATE TEXT");
 	private JButton apprDiaBtn = new JButton("DIALOGUE FOR APPROVAL");
 	private JButton dOSigBtn = new JButton("DROP-OFF SIGNATURE");
 	private JButton cmplRprBtn = new JButton("COMPLETE REPAIR TEXT");
@@ -86,6 +86,33 @@ public class SalesBarManual extends JPanel {  //Ultimately, you will probably ha
 	 */
 	public SalesBarManual(final JPanel backMenuScreen, final CardLayout backMenuScreenCl) {	
 		
+		// === NEW STUFF FOR ENCAPS ===		
+		//Think: "this" MUST be set with a CardLayout if you expect it to be able to transition to other JPanels. Thus,
+		//"this" should not inherit from MenuItemContent!
+		super("CUSTOMER PROCEDURES", backMenuScreen, backMenuScreenCl);		
+		
+		
+		/*
+		add(mainMenu, "main_menu_screen");
+		add(newRepDia, "new_repair_dialogue_screen");
+		add(walkinWO, "walkin_work_order_screen");
+		add(workCmpl, "work_completed_screen");
+		add(pickUpDia, "pickup_dialogue_screen");
+		add(cmpnyWO, "company_work_order_screen");
+		add(cusUpdate, "customers_update_screen");
+		add(apprDia, "approval_dialogue_screen");
+		add(dOSig, "drop_off_signature_screen");
+		add(cmplRpr, "complete_repair_screen");
+		add(repComDia, "repair_complete_dialogue_screen");
+		add(pUSig, "pickup_signature_screen");
+		mainScreenCl.show(this, "main_menu_screen"); 
+		addMainMenuBtnALs();
+		
+		//Start configuring the main menu...
+		mainMenu.setBackground(Color.WHITE);
+		mainMenu.setLayout(new MigLayout());	
+		
+		
 		super();		
 		setLayout(mainScreenCl);	
 		add(mainMenu, "main_menu_screen");
@@ -105,9 +132,8 @@ public class SalesBarManual extends JPanel {  //Ultimately, you will probably ha
 		
 		//Start configuring the main menu...
 		mainMenu.setBackground(Color.WHITE);
-		//mainMenu.setLayout(new MigLayout("debug, align 50% 50%, gapy 10", "[center]"));
 		mainMenu.setLayout(new MigLayout());
-
+		
 		
 		// === HEADER CONFIGURATIONS ===
 		JPanel header = new JPanel();
@@ -128,7 +154,7 @@ public class SalesBarManual extends JPanel {  //Ultimately, you will probably ha
 		header.add(backBtn, "wrap");
 		header.add(headerLbl, "gaptop 10"); //HARD-CODED VALUE
 		mainMenu.add(header, "height 100, pushx, growx, wrap"); //HARD-CODED VALUE. Setting values for Header here.
-
+		
 		
 		// === BUTTON AREA CONFIGURATIONS ===
 		btnArea.setLayout(new MigLayout());
@@ -138,6 +164,9 @@ public class SalesBarManual extends JPanel {  //Ultimately, you will probably ha
 		JScrollPane scrollPane = new JScrollPane(btnArea);
 		mainMenu.add(scrollPane, "push, grow");
 		
+		
+		
+		// ####### IF YOU USED CLASSES, THEN THE FOLLOWING CHUNKS OF CODE WOULDN'T NEED TO BE HERE! #######
 		
 		// === NEW REPAIR DIALOGUE SCREEN CONFIGURATIONS ===
 		newRepDia.setBackground(Color.WHITE);
@@ -196,7 +225,7 @@ public class SalesBarManual extends JPanel {  //Ultimately, you will probably ha
 		apprDia.setBackground(Color.WHITE);
 		apprDia.setLayout(new MigLayout());
 		createHeader("DIALOGUE FOR APPROVAL", apprDia);
-		fillComponentContent("screen_content/approval_dialogue.html", apprDia, "FOLLOW CUSTOMER UPDATE TEXT", "customers_update_screen");
+		fillComponentContent("screen_content/approval_dialogue.html", apprDia, "FOLLOW CUSTOMERS UPDATE TEXT", "customers_update_screen");
 		
 		
 		// === DROP-OFF SIGNATURE CONFIGURATIONS ===
@@ -229,8 +258,7 @@ public class SalesBarManual extends JPanel {  //Ultimately, you will probably ha
 		createHeader("PICK UP SIGNATURE", pUSig);
 		fillBasicContent("screen_content/pickup_sig.html", pUSig);
 		addTextToCBBtn(pUSig);
-		
-		
+		*/
 	}
 
 	

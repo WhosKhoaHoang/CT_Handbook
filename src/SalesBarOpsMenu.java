@@ -14,7 +14,6 @@ public class SalesBarOpsMenu extends OpsMenu {
 	private JButton openingStoreCLBtn = new JButton("Opening Store Check List");
 	private JButton phoneCallBtn = new JButton("Phone Call Procedures");
 	private JButton SBManualBtn = new JButton("Customer Procedures");
-	//private JButton cusProcBtn = new JButton("Customer Procedures");
 	private JButton recMailOpsBtn = new JButton("Receiving Mail Operations");
 	private JButton dropOffUpdatesBtn = new JButton("Drop-off Updates");
 	private List<JButton> btnsLst = new ArrayList<JButton>(Arrays.asList(openingStoreCLBtn, phoneCallBtn,
@@ -44,8 +43,7 @@ public class SalesBarOpsMenu extends OpsMenu {
 		// =========== Add the JPanels as cards ===========
 		add(openingStoreCLContent, "opening_store_checklist");
 		add(phoneCallProcContent, "phone_call");
-		add(SBManual, "sales_bar_manual");
-		//add(cusProc, "customer_procedures");
+		add(SBManual, "customer_procedures");
 		add(menuItemContent, "receiving_mail_ops");
 		add(dOUpdatesContent, "dropoff_updates");
 	}
@@ -77,18 +75,9 @@ public class SalesBarOpsMenu extends OpsMenu {
 		SBManualBtn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				menuScreenCl.show(curPage, "sales_bar_manual");								
-			}
-		});
-	
-		/*
-		cusProcBtn.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
 				menuScreenCl.show(curPage, "customer_procedures");								
 			}
 		});
-		*/
 		
 		recMailOpsBtn.addActionListener(new ActionListener() {
 			@Override
