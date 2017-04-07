@@ -15,8 +15,10 @@ public class TechnicianOpsMenu extends OpsMenu {
 	private JButton cusProcsBtn = new JButton("Customer Procedures");
 	private JButton closingCLBtn = new JButton("Closing Store Checklist");
 	private JButton invenCheckProcBtn = new JButton("Inventory Check Procedure");
+	private JButton techToolsBtn = new JButton("Tech Tools");
+	private JButton technicianKBBtn = new JButton("Technician Knowledge Base");
 	private List<JButton> btnsLst = new ArrayList<JButton>(Arrays.asList(evRprOpBtn, cusProcsBtn,
-			closingCLBtn, invenCheckProcBtn));	
+			closingCLBtn, invenCheckProcBtn, techToolsBtn, technicianKBBtn));	
 	
 	//=========== Needed for ActionListeners ===========
 	OpsMenu curPage = this;
@@ -35,12 +37,16 @@ public class TechnicianOpsMenu extends OpsMenu {
 		SalesBarManual salesBarManual = new SalesBarManual(this, menuScreenCl);
 		MenuItemContent closingStoreCL = new ClosingStoreCL(this, menuScreenCl);
 		MenuItemContent inventoryCheckProcContent = new InventoryCheckProcContent(this, menuScreenCl);
+		MenuItemContent techToolsContent = new TechToolsContent(this, menuScreenCl);
+		MenuItemContent technicianKBContent = new TechnicianKBContent(this, menuScreenCl);
 		
 		// =========== Add the JPanels as cards ===========
 		add(techRepairProcContent, "technician_repair_procedures");
 		add(salesBarManual, "customer_procedures");
 		add(closingStoreCL, "closing_store_checklist");
 		add(inventoryCheckProcContent, "inventory_check_procedures");
+		add(techToolsContent, "tech_tools");
+		add(technicianKBContent, "technician_knowledge_base");
 	}
 	
 	
@@ -74,6 +80,20 @@ public class TechnicianOpsMenu extends OpsMenu {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				menuScreenCl.show(curPage, "inventory_check_procedures");												
+			}
+		});
+		
+		techToolsBtn.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				menuScreenCl.show(curPage, "tech_tools");												
+			}
+		});
+		
+		technicianKBBtn.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				menuScreenCl.show(curPage, "technician_knowledge_base");												
 			}
 		});
 	}

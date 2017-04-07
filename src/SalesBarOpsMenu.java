@@ -15,9 +15,10 @@ public class SalesBarOpsMenu extends OpsMenu {
 	private JButton phoneCallBtn = new JButton("Phone Call Procedures");
 	private JButton SBManualBtn = new JButton("Customer Procedures");
 	private JButton recMailOpsBtn = new JButton("Receiving Mail Operations");
-	private JButton dropOffUpdatesBtn = new JButton("Drop-off Updates");
+	private JButton dropOffUpdatesBtn = new JButton("Drop-Off Updates");
+	private JButton yelpResponseTmplBtn = new JButton("Yelp Response Template");
 	private List<JButton> btnsLst = new ArrayList<JButton>(Arrays.asList(openingStoreCLBtn, phoneCallBtn,
-			SBManualBtn, recMailOpsBtn, dropOffUpdatesBtn));	
+			SBManualBtn, recMailOpsBtn, dropOffUpdatesBtn, yelpResponseTmplBtn));	
 	
 	//=========== Needed for ActionListeners ===========
 	OpsMenu curPage = this;
@@ -44,6 +45,7 @@ public class SalesBarOpsMenu extends OpsMenu {
 		//JPanel cusProc = new JPanel();
 		MenuItemContent menuItemContent = new RecMailProcContent(this, menuScreenCl);
 		MenuItemContent dOUpdatesContent = new DOUpdatesContent(this, menuScreenCl);		
+		MenuItemContent yelpResponseTmplContent = new YelpResponseTmplContent(this, menuScreenCl);
 		
 		// =========== Add the JPanels as cards ===========
 		add(openingStoreCLContent, "opening_store_checklist");
@@ -51,6 +53,7 @@ public class SalesBarOpsMenu extends OpsMenu {
 		add(SBManual, "customer_procedures");
 		add(menuItemContent, "receiving_mail_ops");
 		add(dOUpdatesContent, "dropoff_updates");
+		add(yelpResponseTmplContent, "yelp_response_template");
 	}
 	
 	
@@ -95,6 +98,13 @@ public class SalesBarOpsMenu extends OpsMenu {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				menuScreenCl.show(curPage, "dropoff_updates");								
+			}
+		});
+		
+		yelpResponseTmplBtn.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				menuScreenCl.show(curPage, "yelp_response_template");								
 			}
 		});
 	}

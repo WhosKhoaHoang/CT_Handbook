@@ -11,9 +11,14 @@ import org.jdesktop.swingx.border.DropShadowBorder;
 import net.miginfocom.swing.MigLayout;
 
 //TODO: Consider changing hard-coded values!
-//TODO: Establish Event Listeners for selecting and copying text
+//TODO: Establish Event Listener for selecting and copying text
 //TODO: Add Event Listeners for keyboard navigation
+//TODO: Find way to make Handbook editable and have instances of the software be able to check for these updates
 //TODO: Change the program's desktop and dock (for Macs) icon
+//TODO: Work on Technician Knowledge Base for Technician Operations
+//TODO: Implement search functionality
+//TODO: Allow manager to compare various prices for a certain item on Ebay and choose the best one
+//TODO: Determine if it'd be beneficial each menu page should have a distinctive label, not just "ops_main_screen"
 
 public class CTHandbook {
 	final int PREF_WIDTH = 800;
@@ -33,6 +38,7 @@ public class CTHandbook {
 	private CardLayout homeScreenCl = new CardLayout(); 
 	
 	public CTHandbook() {
+		frame.setTitle("CleverTech Handbook");
 		
         DropShadowBorder shadow = new DropShadowBorder();
         shadow.setShadowColor(Color.BLACK);
@@ -56,7 +62,7 @@ public class CTHandbook {
 		// === CLEVERTECH LOGO CONFIGURATIONS ===
 		logo.setBackground(Color.WHITE);
 		
-		// === DIGITAL HANDBOOK LOGO CONFIGURATIONS ===
+		// === DIGITAL HANDBOOK LABEL CONFIGURATIONS ===
 		subtitle.setFont(new Font("Arial", Font.BOLD, 20));
 		subtitle.setForeground(Color.decode("0x242424"));
 		

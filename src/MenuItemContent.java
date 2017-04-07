@@ -163,7 +163,7 @@ public class MenuItemContent extends JPanel {
 		HTMLDocument contentDoc = (HTMLDocument)content.getDocument();
 		HTMLEditorKit contentEK = (HTMLEditorKit)content.getEditorKit();
 		
-		//Insert HTML into HTMLDocument
+		//Insert HTML into HTMLDocument, which is then rendered on the content JPanel
 		for (int i = 0; i < lineLst.size(); i++) {
 			if (lineLst.get(i).equals("<!--INSERT-->")) {
 				content.insertComponent(button);

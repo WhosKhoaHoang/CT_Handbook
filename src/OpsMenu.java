@@ -38,8 +38,8 @@ public class OpsMenu extends JPanel {
 		//createBtnArea(); //Should this be specific to each OpsMenu instead? Yes!
 		 
 		//Establish cards 
-		add(content, "ops_main_screen");
-		menuScreenCl.show(this, "ops_main_screen");
+		add(content, "ops_main_screen"); //Should the page label vary depending on what operations menu it is?
+		menuScreenCl.show(this, "ops_main_screen"); //Should the page label vary depending on what operations menu it is?
 		//"ops_main_screen" is referenced in the MenuItemContent base class
 	}
 	
@@ -100,7 +100,7 @@ public class OpsMenu extends JPanel {
 			JLabel num = new JLabel(String.valueOf(i+1));
 			num.setFont(new Font("Arial", Font.BOLD, 20));	
 			num.setForeground(Color.decode("0x929497"));
-			btnArea.add(num);
+			btnArea.add(num, "gapright 10");
 			btnArea.add(btnsLst.get(i), "width " + String.valueOf(700/1.5) + ", height " + String.valueOf(300/5) + 
 					", center, wrap, gaptop 10");
 			

@@ -19,9 +19,10 @@ public class ManagerOpsMenu extends OpsMenu {
 	private JButton invenCheckProcBtn = new JButton("Inventory Check Procedure");
 	private JButton orderingOffSupBtn = new JButton("Ordering Office Supplies");
 	private JButton onlineMrktingBtn = new JButton("Online Marketing");
+	private JButton yelpResponseTmplBtn = new JButton("Yelp Response Template");
 	private List<JButton> btnsLst = new ArrayList<JButton>(Arrays.asList(openStoreCLBtn, shippingProcBtn,
 			pickUpDropOffProcBtn, onsitePhoneRprsBtn, CusProcBtn, purchOpsBtn, invenCheckProcBtn, orderingOffSupBtn, 
-			onlineMrktingBtn));	
+			onlineMrktingBtn, yelpResponseTmplBtn));	
 	
 	//=========== Needed for ActionListeners ===========
 	OpsMenu curPage = this;
@@ -45,6 +46,7 @@ public class ManagerOpsMenu extends OpsMenu {
 		MenuItemContent inventoryCheckProcContent = new InventoryCheckProcContent(this, menuScreenCl);
 		MenuItemContent officeSuppliesCLContent = new OfficeSuppliesCLContent(this, menuScreenCl);
 		MenuItemContent onlineMarkertingContent = new OnlineMarketingProcContent(this, menuScreenCl);
+		MenuItemContent yelpResponeTmplContent = new YelpResponseTmplContent(this, menuScreenCl);
 		
 		// =========== Add the JPanels as cards ===========
 		add(openingStoreCLContent, "opening_store_checklist");
@@ -55,7 +57,8 @@ public class ManagerOpsMenu extends OpsMenu {
 		add(purchasingProcContent, "purchasing_procedures");
 		add(inventoryCheckProcContent, "inventory_check_procedures");
 		add(officeSuppliesCLContent, "office_supplies_checklist");
-		add(onlineMarkertingContent, "online_marketing_procedures");		
+		add(onlineMarkertingContent, "online_marketing_procedures");
+		add(yelpResponeTmplContent, "yelp_response_template");		
 	}
 	
 	
@@ -124,6 +127,13 @@ public class ManagerOpsMenu extends OpsMenu {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				menuScreenCl.show(curPage, "online_marketing_procedures");												
+			}
+		});
+		
+		yelpResponseTmplBtn.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				menuScreenCl.show(curPage, "yelp_response_template");												
 			}
 		});
 	}
