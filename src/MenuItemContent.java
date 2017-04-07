@@ -199,10 +199,11 @@ public class MenuItemContent extends JPanel {
 	protected void addTextToCBBtn() {
 		JButton copyTxtBtn = new JButton("Copy text to clipboard");
 		add(copyTxtBtn);
+		
 		final int JSCROLLPANE_COMPONENT_INDEX = 1;
 		copyTxtBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				HtmlToText parser = new HtmlToText();
+				HTMLToText parser = new HTMLToText();
 				try {
 					JScrollPane sPane = (JScrollPane)getComponent(JSCROLLPANE_COMPONENT_INDEX);
 					JViewport vPort = sPane.getViewport();

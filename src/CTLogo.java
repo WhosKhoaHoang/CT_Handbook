@@ -13,7 +13,7 @@ public class CTLogo extends JPanel {
 	}
 	
 	public Dimension getPreferredSize() {
-	    return (new Dimension(147, 85));
+	    return (new Dimension(422, 247));
 	}
 	
 	public void paintComponent(Graphics g) {

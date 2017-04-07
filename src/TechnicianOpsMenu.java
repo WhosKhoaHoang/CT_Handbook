@@ -11,7 +11,7 @@ import javax.swing.JPanel;
 public class TechnicianOpsMenu extends OpsMenu {
 
 	private static final long serialVersionUID = 1L;
-	private JButton evRprOpBtn = new JButton("Technician Repair Procedures");
+	private JButton evRprOpBtn = new JButton("All Technician Repair Procedures");
 	private JButton cusProcsBtn = new JButton("Customer Procedures");
 	private JButton closingCLBtn = new JButton("Closing Store Checklist");
 	private JButton invenCheckProcBtn = new JButton("Inventory Check Procedure");
