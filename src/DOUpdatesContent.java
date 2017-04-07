@@ -9,5 +9,4 @@ public class DOUpdatesContent extends MenuItemContent {
 		createHeader("Drop-Off Updates");
 		fillBasicContent("screen_content/dropoff_updates.html");
 	}
-
 }

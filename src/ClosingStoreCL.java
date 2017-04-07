@@ -9,5 +9,4 @@ public class ClosingStoreCL extends MenuItemContent {
 		createHeader("Closing Store Checklist");
 		fillBasicContent("screen_content/closing_store_checklist.html");
 	}
-
 }

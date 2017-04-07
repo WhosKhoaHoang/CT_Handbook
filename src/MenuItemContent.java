@@ -32,12 +32,10 @@ public class MenuItemContent extends JPanel {
 	private static final long serialVersionUID = 1L;
 	private JPanel backMenuScreen;
 	private CardLayout backMenuScreenCl;
-	//private String backMenuScreenLbl;
 
 	public MenuItemContent(final JPanel backMenuScreen, final CardLayout backMenuScreenCl) {
 		this.backMenuScreen = backMenuScreen;
 		this.backMenuScreenCl = backMenuScreenCl;
-		//this.backMenuScreenLbl = backMenuScreenLbl;
 		setBackground(Color.WHITE);
 		setLayout(new MigLayout());
 	}
@@ -214,9 +212,7 @@ public class MenuItemContent extends JPanel {
 					StringSelection stringSelection = new StringSelection(parser.getText());
 					Clipboard clpBrd = Toolkit.getDefaultToolkit().getSystemClipboard();
 					clpBrd.setContents(stringSelection, null);
-				} catch (IOException ee) {
-				  //handle exception
-				}
+				} catch (IOException ee) { ee.printStackTrace(); }
 			}
 		});
 	}

@@ -10,5 +10,4 @@ public class CustomersUpdateContent extends MenuItemContent {
 		createHeader("CUSTOMERS UPDATE TEXT");
 		fillBasicContent("screen_content/customers_update_text.html");
 	}
-
 }

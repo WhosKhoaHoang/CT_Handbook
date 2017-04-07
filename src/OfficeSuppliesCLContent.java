@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URISyntaxException;
 import java.nio.charset.StandardCharsets;
-
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextPane;
@@ -21,7 +20,6 @@ public class OfficeSuppliesCLContent extends MenuItemContent{
 		super(backMenuScreen, backMenuScreenCl);
 		createHeader("Office Supplies Checklist");
 		fillBasicContent("screen_content/office_supplies_checklist.html");
-		
 	}
 	
 	@Override
@@ -35,7 +33,7 @@ public class OfficeSuppliesCLContent extends MenuItemContent{
         try {
             BufferedReader br = new BufferedReader(new InputStreamReader(
             		Main.class.getResourceAsStream(fileName), StandardCharsets.UTF_8));
-            StringBuilder sb = new StringBuilder();
+            StringBuilder sb = new StringBuilder(); //More memory-efficient to use StringBuilders
             String line = br.readLine();
             
             while (line != null) {
@@ -46,30 +44,26 @@ public class OfficeSuppliesCLContent extends MenuItemContent{
             String everything = sb.toString();
             content.setText(everything);
             
-            //Add a hyperlink listener!
-            content.addHyperlinkListener(new HyperlinkListener() {
-                public void hyperlinkUpdate(HyperlinkEvent e) {
-                    if (e.getEventType() == HyperlinkEvent.EventType.ACTIVATED) {
-                        if (Desktop.isDesktopSupported()) {
-                            try {
-                                Desktop.getDesktop().browse(e.getURL().toURI());
-                            } catch (IOException e1) {
-                                // TODO Auto-generated catch block
-                                e1.printStackTrace();
-                            } catch (URISyntaxException e1) {
-                                // TODO Auto-generated catch block
-                                e1.printStackTrace();
-                            }
-                        }
-                    }
-                }
-            });
-            
             br.close();         
         }
         catch(FileNotFoundException e) { e.printStackTrace(); }
         catch(IOException e) {e.printStackTrace();}
-		
+        
+        //Add a hyperlink listener!
+        content.addHyperlinkListener(new HyperlinkListener() {
+            public void hyperlinkUpdate(HyperlinkEvent e) {
+                if (e.getEventType() == HyperlinkEvent.EventType.ACTIVATED) {
+                    if (Desktop.isDesktopSupported()) {
+                        try {
+                            Desktop.getDesktop().browse(e.getURL().toURI());
+                        } 
+                        catch (IOException e1) { e1.printStackTrace(); } 
+                        catch (URISyntaxException e1) { e1.printStackTrace();}
+                    }
+                }
+            }
+        });
+        
 		final JScrollPane contentScroll = new JScrollPane(content);
 		contentScroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS); 
 		SwingUtilities.invokeLater(new Runnable() { //This is the only way I can get the JScrollPane to default to a 0 value...

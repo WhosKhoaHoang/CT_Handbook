@@ -1,7 +1,5 @@
 import java.awt.CardLayout;
-
 import javax.swing.JPanel;
-
 
 public class CusUpdateContent extends MenuItemContent {
 	private static final long serialVersionUID = 1L;
@@ -12,5 +10,4 @@ public class CusUpdateContent extends MenuItemContent {
 		fillBasicContent("screen_content/customers_update_text.html");	
 		
 	}
-
 }

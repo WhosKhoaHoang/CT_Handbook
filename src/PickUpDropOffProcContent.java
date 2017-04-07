@@ -9,5 +9,4 @@ public class PickUpDropOffProcContent extends MenuItemContent {
 		createHeader("Pick-Up/Drop-Off Procedures");
 		fillBasicContent("screen_content/pickup_and_dropoff_procedures.html");
 	}
-
 }

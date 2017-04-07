@@ -31,7 +31,6 @@ public class CTHandbook {
 	
 	private CardLayout homeScreenCl = new CardLayout(); 
 	
-	
 	public CTHandbook() {
 		
         DropShadowBorder shadow = new DropShadowBorder();
@@ -118,8 +117,9 @@ public class CTHandbook {
 		btn.setMargin(new Insets(7, 7, 7, 7)); //Perhaps inset values should NOT be hard coded?
 		btn.setForeground(Color.WHITE);
 		btn.setBackground(Color.decode("0x026937"));
-		btn.setOpaque(true); //Need to say this so that the button's color shows up
-		
+		btn.setOpaque(true); 
+		//Need to say this so that the button's color shows up and you don't get a whacky
+		//silver button on top of a colored square.
 	}
 
 }

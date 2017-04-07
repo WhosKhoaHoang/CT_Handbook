@@ -3,20 +3,16 @@ import javax.swing.JPanel;
 import java.awt.Dimension;
 import java.awt.Graphics;
 
-
 public class CTLogo extends JPanel {
 	private static final long serialVersionUID = 1L; //Eclipse suggested this
 	ImageIcon image;
 	
 	public CTLogo() {
-
 		String pathToLogo = "images/ct_logo.png"; //images is a directory that must also be in the src directory
 		image = new ImageIcon(getClass().getClassLoader().getResource(pathToLogo));
-
 	}
 	
-	public Dimension getPreferredSize()
-	{
+	public Dimension getPreferredSize() {
 	    return (new Dimension(147, 85));
 	}
 	

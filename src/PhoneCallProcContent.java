@@ -9,5 +9,4 @@ public class PhoneCallProcContent extends MenuItemContent {
 		createHeader("Phone Call Procedures");
 		fillBasicContent("screen_content/phone_call_procedures.html");
 	}
-
 }

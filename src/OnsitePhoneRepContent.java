@@ -1,7 +1,6 @@
 import java.awt.CardLayout;
 import javax.swing.JPanel;
 
-
 public class OnsitePhoneRepContent extends MenuItemContent {
 	private static final long serialVersionUID = 1L;
 
@@ -10,5 +9,4 @@ public class OnsitePhoneRepContent extends MenuItemContent {
 		createHeader("On-site Phone Repairs");
 		fillBasicContent("screen_content/onsite_phone_repairs.html");
 	}
-
 }
