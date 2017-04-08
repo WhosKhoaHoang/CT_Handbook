@@ -9,8 +9,6 @@ public class ShippingProcContent extends MenuItemContent {
 		super(backMenuScreen, backMenuScreenCl);
 		createHeader("Shipping Procedures");
 		fillBasicContent("screen_content/shipping_procedures.html");
-		
-		
 	}
 	
 }

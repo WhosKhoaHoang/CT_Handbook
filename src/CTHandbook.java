@@ -19,6 +19,8 @@ import net.miginfocom.swing.MigLayout;
 //TODO: Implement search functionality
 //TODO: Allow manager to compare various prices for a certain item on Ebay and choose the best one
 //TODO: Determine if it'd be beneficial each menu page should have a distinctive label, not just "ops_main_screen"
+//TODO: Fix issue of not being able to put two buttons in a single JTextPane
+//TODO: Allow a user to add new menu items + content for those menu items
 
 public class CTHandbook {
 	final int PREF_WIDTH = 800;

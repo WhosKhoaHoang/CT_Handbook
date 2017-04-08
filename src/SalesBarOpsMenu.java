@@ -4,6 +4,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
@@ -14,11 +15,12 @@ public class SalesBarOpsMenu extends OpsMenu {
 	private JButton openingStoreCLBtn = new JButton("Opening Store Check List");
 	private JButton phoneCallBtn = new JButton("Phone Call Procedures");
 	private JButton SBManualBtn = new JButton("Customer Procedures");
+	private JButton purchOpsBtn = new JButton("Purchasing Procedures");
 	private JButton recMailOpsBtn = new JButton("Receiving Mail Operations");
 	private JButton dropOffUpdatesBtn = new JButton("Drop-Off Updates");
 	private JButton yelpResponseTmplBtn = new JButton("Yelp Response Template");
 	private List<JButton> btnsLst = new ArrayList<JButton>(Arrays.asList(openingStoreCLBtn, phoneCallBtn,
-			SBManualBtn, recMailOpsBtn, dropOffUpdatesBtn, yelpResponseTmplBtn));	
+			SBManualBtn, purchOpsBtn, recMailOpsBtn, dropOffUpdatesBtn, yelpResponseTmplBtn));	
 	
 	//=========== Needed for ActionListeners ===========
 	OpsMenu curPage = this;
@@ -43,6 +45,7 @@ public class SalesBarOpsMenu extends OpsMenu {
 		// - You passed "this" so that SalesBarManual could have a handle back to the menu screen.
 		// - You passed menuScreenCL so that SalesBarManual could have the layout generator to "turn back the page" to the menu screen.
 		//JPanel cusProc = new JPanel();
+		MenuItemContent purchasingProcContent = new PurchasingProcContent(this, menuScreenCl);
 		MenuItemContent menuItemContent = new RecMailProcContent(this, menuScreenCl);
 		MenuItemContent dOUpdatesContent = new DOUpdatesContent(this, menuScreenCl);		
 		MenuItemContent yelpResponseTmplContent = new YelpResponseTmplContent(this, menuScreenCl);
@@ -51,6 +54,7 @@ public class SalesBarOpsMenu extends OpsMenu {
 		add(openingStoreCLContent, "opening_store_checklist");
 		add(phoneCallProcContent, "phone_call");
 		add(SBManual, "customer_procedures");
+		add(purchasingProcContent, "purchasing_procedures");
 		add(menuItemContent, "receiving_mail_ops");
 		add(dOUpdatesContent, "dropoff_updates");
 		add(yelpResponseTmplContent, "yelp_response_template");
@@ -84,6 +88,13 @@ public class SalesBarOpsMenu extends OpsMenu {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				menuScreenCl.show(curPage, "customer_procedures");								
+			}
+		});
+		
+		purchOpsBtn.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				menuScreenCl.show(curPage, "purchasing_procedures");
 			}
 		});
 		

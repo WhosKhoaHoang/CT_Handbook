@@ -6,8 +6,12 @@ public class DOSigContent extends MenuItemContent {
 
 	public DOSigContent(JPanel backMenuScreen, CardLayout backMenuScreenCl) {
 		super(backMenuScreen, backMenuScreenCl);
-		createHeader("DIALOGUE FOR APPROVAL");
+		createHeader("DROP-OFF SIGNATURE");
+		fillBasicContent("screen_content/drop_off_sig.html");
+		/*
 		fillComponentContent(backMenuScreen, backMenuScreenCl,
-				"screen_content/approval_dialogue.html", "FOLLOW CUSTOMERS UPDATE TEXT", "customers_update_screen");
+				"screen_content/drop_off_sig.html", "FOLLOW CUSTOMERS UPDATE TEXT", "customers_update_screen");
+		*/
+		addTextToCBBtn();
 	}
 }

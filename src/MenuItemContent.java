@@ -159,9 +159,11 @@ public class MenuItemContent extends JPanel {
         catch(FileNotFoundException e) { e.printStackTrace(); }
         catch(IOException e) { e.printStackTrace();}
 		
+        // ============================================ FOCUS HERE!!!!! ============================================
+        
 		//Make HTMLDocument and HTMLEditorKit
-		HTMLDocument contentDoc = (HTMLDocument)content.getDocument();
-		HTMLEditorKit contentEK = (HTMLEditorKit)content.getEditorKit();
+		HTMLDocument contentDoc = (HTMLDocument)content.getDocument(); //Think: The content JPanel as an HTMLDocument
+		HTMLEditorKit contentEK = (HTMLEditorKit)content.getEditorKit(); //Think: The object that modifies the HTMLDocument. The "pen".
 		
 		//Insert HTML into HTMLDocument, which is then rendered on the content JPanel
 		for (int i = 0; i < lineLst.size(); i++) {
@@ -173,7 +175,7 @@ public class MenuItemContent extends JPanel {
 			else {
 				try {
 					contentEK.insertHTML(contentDoc, contentDoc.getLength(), lineLst.get(i), 0, 0, null);
-					//Seems like inserting a single opening tag and the corresponding closing tag later on won't do anything...
+					//Seems like inserting a single opening tag and the corresponding closing tag later in another iteration won't do anything...
 					// - If that's the case, you're gonna have to be a bit verbose on how you write your HTML tags in the HTML file. See
 					//    work_completed_text.html as an example.
 				} 
@@ -182,10 +184,18 @@ public class MenuItemContent extends JPanel {
 			}
 		}
 		
+        // ============================================ FOCUS HERE!!!!! ============================================
+
+		
 		
 		//Make JScrollPane to contain content
-		JScrollPane contentScroll = new JScrollPane(content);
-		
+		final JScrollPane contentScroll = new JScrollPane(content);
+		contentScroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS); 
+		SwingUtilities.invokeLater(new Runnable() { //This is the only way I can get the JScrollPane to default to a 0 value...
+			   public void run() { 
+				   contentScroll.getVerticalScrollBar().setValue(0);
+			   }
+			});
 		//Add JScrollPant onto JPanel for this screen
 		add(contentScroll, "push, grow");		
 	}
@@ -218,3 +228,4 @@ public class MenuItemContent extends JPanel {
 		});
 	}
 }
+

@@ -17,9 +17,8 @@ public class HTMLToText extends HTMLEditorKit.ParserCallback {
 	
 	public void handleText(char[] text, int pos) {
 		s.append(text);
-		s.append("\n\n");
-		//Added the extra \n so that a full line break is between each field
-		//when you paste.
+		s.append("\n");
+		//Removed extra \n to get rid of double spacing for copy->paste
 	}
 	
 	public String getText() {

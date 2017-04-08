@@ -8,7 +8,7 @@ public class PUSigContent extends MenuItemContent {
 
 	public PUSigContent(JPanel backMenuScreen, CardLayout backMenuScreenCl) {
 		super(backMenuScreen, backMenuScreenCl);
-		createHeader("PICK UP SIGNATURE");
+		createHeader("PICK-UP SIGNATURE");
 		fillBasicContent("screen_content/pickup_sig.html");
 		addTextToCBBtn();	
 		

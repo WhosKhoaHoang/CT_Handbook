@@ -12,17 +12,19 @@ public class ManagerOpsMenu extends OpsMenu {
 	private static final long serialVersionUID = 1L;
 	private JButton openStoreCLBtn = new JButton("Opening Store Checklist");
 	private JButton shippingProcBtn = new JButton("Shipping Procedures");
-	private JButton pickUpDropOffProcBtn = new JButton("Pick-Up/Drop-Off Procedure");
-	private JButton onsitePhoneRprsBtn = new JButton("Onsite Phone Repairs");
+	private JButton pickUpDropOffProcBtn = new JButton("Pick-Up/Drop-Off Procedures");
+	private JButton onsitePhoneRprsBtn = new JButton("On-Site Phone Repairs");
 	private JButton CusProcBtn = new JButton("Customer Procedures");
 	private JButton purchOpsBtn = new JButton("Purchasing Procedures");
-	private JButton invenCheckProcBtn = new JButton("Inventory Check Procedure");
-	private JButton orderingOffSupBtn = new JButton("Ordering Office Supplies");
-	private JButton onlineMrktingBtn = new JButton("Online Marketing");
+	private JButton invenCheckProcBtn = new JButton("Inventory Check Procedures");
+	private JButton orderingOffSupBtn = new JButton("Office Supplies Checklist");
+	private JButton onlineMrktingBtn = new JButton("Online Marketing Procedures");
 	private JButton yelpResponseTmplBtn = new JButton("Yelp Response Template");
+	private JButton worksheetsBtn = new JButton("Worksheets");
+
 	private List<JButton> btnsLst = new ArrayList<JButton>(Arrays.asList(openStoreCLBtn, shippingProcBtn,
 			pickUpDropOffProcBtn, onsitePhoneRprsBtn, CusProcBtn, purchOpsBtn, invenCheckProcBtn, orderingOffSupBtn, 
-			onlineMrktingBtn, yelpResponseTmplBtn));	
+			onlineMrktingBtn, yelpResponseTmplBtn, worksheetsBtn));	
 	
 	//=========== Needed for ActionListeners ===========
 	OpsMenu curPage = this;
@@ -47,6 +49,7 @@ public class ManagerOpsMenu extends OpsMenu {
 		MenuItemContent officeSuppliesCLContent = new OfficeSuppliesCLContent(this, menuScreenCl);
 		MenuItemContent onlineMarkertingContent = new OnlineMarketingProcContent(this, menuScreenCl);
 		MenuItemContent yelpResponeTmplContent = new YelpResponseTmplContent(this, menuScreenCl);
+		MenuItemContent worksheetsContent = new WorksheetsContent(this, menuScreenCl);
 		
 		// =========== Add the JPanels as cards ===========
 		add(openingStoreCLContent, "opening_store_checklist");
@@ -59,6 +62,7 @@ public class ManagerOpsMenu extends OpsMenu {
 		add(officeSuppliesCLContent, "office_supplies_checklist");
 		add(onlineMarkertingContent, "online_marketing_procedures");
 		add(yelpResponeTmplContent, "yelp_response_template");		
+		add(worksheetsContent, "worksheets");		
 	}
 	
 	
@@ -134,6 +138,13 @@ public class ManagerOpsMenu extends OpsMenu {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				menuScreenCl.show(curPage, "yelp_response_template");												
+			}
+		});
+		
+		worksheetsBtn.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				menuScreenCl.show(curPage, "worksheets");												
 			}
 		});
 	}

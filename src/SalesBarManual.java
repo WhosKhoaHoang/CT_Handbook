@@ -32,7 +32,7 @@ public class SalesBarManual extends OpsMenu {  //Should this inherit from MenuIt
 	private JButton newRepDiaBtn = new JButton("DIALOGUE FOR NEW REPAIR");
 	private JButton walkinWOBtn= new JButton("WALK-IN WORK ORDER");
 	private JButton workCmplBtn = new JButton("WORK COMPLETED TEXT");
-	private JButton pickUpDiaBtn = new JButton("DIALOGUE FOR PICK UP");
+	private JButton pickUpDiaBtn = new JButton("DIALOGUE FOR PICK-UP");
 	private JButton cmpnyWOBtn = new JButton("COMPANY WORK ORDER");
 	private JButton cusUpdateBtn = new JButton("CUSTOMERS UPDATE TEXT");
 	private JButton apprDiaBtn = new JButton("DIALOGUE FOR APPROVAL");
@@ -78,7 +78,7 @@ public class SalesBarManual extends OpsMenu {  //Should this inherit from MenuIt
 		header.setBackground(Color.decode("0x026937"));
 		header.setLayout(new MigLayout());
 		
-		JLabel headerLbl = new JLabel("CUSTOMER PROCEDURES");
+		JLabel headerLbl = new JLabel("Customer Procedures");
 		headerLbl.setFont(new Font("Helvetica", Font.BOLD, 25));
 		headerLbl.setForeground(Color.WHITE);
 		
