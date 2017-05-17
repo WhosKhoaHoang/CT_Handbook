@@ -8,7 +8,11 @@ public class OpeningStoreCLContent extends MenuItemContent {
 		super(backMenuScreen, backMenuScreenCl);
 		createHeader("Opening Store Checklist");
 		//fillBasicContent("screen_content/opening_store_checklist.html");
+		
+		// FOCUS
+		// ######### Connect to database and pull contents to put into the content window? #########
 		createTextEdit();
+
 
 	}
 }

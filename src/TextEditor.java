@@ -93,6 +93,9 @@ public class TextEditor extends JPanel {
 		JScrollPane editorScrollPane = new JScrollPane(editor__);
 
 		editor__.setDocument(getNewDocument());
+		
+		// ######### Have argument for constructor that allows document to be set with content here? #########
+		
 		editor__.addKeyListener(new BulletParaKeyListener());
 		editor__.addKeyListener(new NumbersParaKeyListener());
 		editor__.addCaretListener(new EditorCaretListener());
@@ -201,9 +204,13 @@ public class TextEditor extends JPanel {
 		
 		JButton updateDbBtn = new JButton("Update Database");
 		//updateDbBtn.addActionListener(new UpdateDbActionListener());
-		
+		// FOCUS
+		// ######### Perhaps provide argument to UpdateDBActionListener to specify what category needs to be updated? #########
+
 		
 		// ############################## PANEL FOR TOOLBAR PANEL ##############################
+		// Each panel number corresponds to a row...
+		// ====== First Row ======
 		JPanel panel1 = new JPanel(new FlowLayout(FlowLayout.LEFT));
 		panel1.add(cutButton);
 		panel1.add(copyButton);
@@ -214,34 +221,53 @@ public class TextEditor extends JPanel {
 		panel1.add(underlineButton);
 		panel1.add(new JSeparator(SwingConstants.VERTICAL));	
 		panel1.add(colorButton);
+		/*
 		panel1.add(new JSeparator(SwingConstants.VERTICAL));
 		panel1.add(textAlignComboBox__);
+		*/
 		panel1.add(new JSeparator(SwingConstants.VERTICAL));
 		panel1.add(fontSizeComboBox__);
+		/*
 		panel1.add(new JSeparator(SwingConstants.VERTICAL));
 		panel1.add(fontFamilyComboBox__);
+		*/
 		
+		// ====== Second Row ======
 		JPanel panel2 = new JPanel(new FlowLayout(FlowLayout.LEFT));
+		panel2.add(new JSeparator(SwingConstants.VERTICAL));
+		panel2.add(fontFamilyComboBox__);		
 		panel2.add(insertPictureButton);
 		panel2.add(deletePictureButton);
 		panel2.add(new JSeparator(SwingConstants.VERTICAL));
 		panel2.add(bulletInsertButton);
 		panel2.add(bulletRemoveButton);
 		panel2.add(new JSeparator(SwingConstants.VERTICAL));
+		/*
 		panel2.add(numbersInsertButton);
 		panel2.add(numbersRemoveButton);
 		panel2.add(new JSeparator(SwingConstants.VERTICAL));
 		panel2.add(undoButton);
 		panel2.add(redoButton);
+		*/
 		
-		//===== My Custom Buttons =====
+		// ====== Third Row ======
 		JPanel panel3 = new JPanel(new FlowLayout(FlowLayout.LEFT));
+		panel3.add(numbersInsertButton);
+		panel3.add(numbersRemoveButton);
+		/*
+		panel3.add(new JSeparator(SwingConstants.VERTICAL));
+		panel3.add(undoButton);
+		panel3.add(redoButton);
+		*/
+		// (My Custom Buttons)
 		panel3.add(printToConsBtn);
+		/*
 		panel3.add(readFileBtn);
 		panel3.add(writeFileBtn);
 		panel3.add(readDbBtn);
 		panel3.add(updateDbBtn);
 		panel3.add(insertDbBtn);
+		*/
 		
 		
 		// ===== Add contents to toolbar panel =====		
@@ -1620,8 +1646,3 @@ public class TextEditor extends JPanel {
 		}
 	} // PictureDeleteActionListener
 }
-
-
-
-
-

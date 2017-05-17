@@ -26,6 +26,9 @@ public class ManagerOpsMenu extends OpsMenu {
 			pickUpDropOffProcBtn, onsitePhoneRprsBtn, CusProcBtn, purchOpsBtn, invenCheckProcBtn, orderingOffSupBtn, 
 			onlineMrktingBtn, yelpResponseTmplBtn, worksheetsBtn));	
 	
+	MenuItemContent openingStoreCLContent = new OpeningStoreCLContent(this, menuScreenCl);
+
+	
 	//=========== Needed for ActionListeners ===========
 	OpsMenu curPage = this;
 	
@@ -39,7 +42,7 @@ public class ManagerOpsMenu extends OpsMenu {
 		addBtnALs();
 		
 		// =========== The different MenuItemContents that this SalesBarOpsMenu will transition to ===========
-		MenuItemContent openingStoreCLContent = new OpeningStoreCLContent(this, menuScreenCl);
+		//MenuItemContent openingStoreCLContent = new OpeningStoreCLContent(this, menuScreenCl);
 		MenuItemContent shippingProcContent = new ShippingProcContent(this, menuScreenCl);
 		MenuItemContent pickUpDropOffContent = new PickUpDropOffProcContent(this, menuScreenCl);
 		MenuItemContent onsitePhoneRepContent = new OnsitePhoneRepContent(this, menuScreenCl);
@@ -75,6 +78,13 @@ public class ManagerOpsMenu extends OpsMenu {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				menuScreenCl.show(curPage, "opening_store_checklist");
+				
+				// FOCUS
+				// ######### Connect to database and pull contents to put into the content window? #########
+				// - I think openStoreCLContent would need to be an instance variable then...
+				// - Would say something like openStoreCLContent.setContent()?
+				// - Perhaps the retrieval of database content can occur inside the constructor for openStoreCLContent? I like
+				//    this idea better because this important piece of code is "closer to the content".
 			}			
 		});
 		

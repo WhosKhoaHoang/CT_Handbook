@@ -111,12 +111,12 @@ public class MenuItemContent extends JPanel {
 	
 	/**
 	 * A helper method that creates the text editor portion of a content page
-	 * @param fileName Name of the file containing the screen's content
-	 * @param panel The JPanel representing the content screen (must be set with a MigLayout)
 	 */
 	protected void createTextEdit() {
+		// FOCUS
+		// ######### Pass an argument to this method that will be passed to TextEditor to let it know what content to show? #########
 		TextEditor textEditor = new TextEditor();
-		add(textEditor, "grow, push"); //How to fill both the width and height?
+		add(textEditor, "grow, push, wrap"); //How to fill both the width and height? with grow, push!!!
 		//add(textEdit);
 	}
 	
