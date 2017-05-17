@@ -8,7 +8,8 @@ public class ShippingProcContent extends MenuItemContent {
 	public ShippingProcContent(JPanel backMenuScreen, CardLayout backMenuScreenCl) {
 		super(backMenuScreen, backMenuScreenCl);
 		createHeader("Shipping Procedures");
-		fillBasicContent("screen_content/shipping_procedures.html");
+		//fillBasicContent("screen_content/shipping_procedures.html");
+		createTextEdit();
 	}
 	
 }

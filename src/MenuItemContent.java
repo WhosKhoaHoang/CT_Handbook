@@ -1,5 +1,6 @@
 import java.awt.CardLayout;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Font;
 import java.awt.Toolkit;
 import java.awt.datatransfer.Clipboard;
@@ -74,7 +75,7 @@ public class MenuItemContent extends JPanel {
 	 * @param panel The JPanel representing the content screen (must be set with a MigLayout)
 	 */
 	protected void fillBasicContent(String fileName) {
-		JTextPane content = new JTextPane();		
+		JTextPane content = new JTextPane(); //Change this to the TextEditor?
 		content.setEditable(false);
 		content.setContentType("text/html");
 		
@@ -106,6 +107,54 @@ public class MenuItemContent extends JPanel {
 			});
 		add(contentScroll, "push, grow, wrap");
 	}
+	
+	//RINGO
+	/**
+	 * A helper method that creates the text editor portion of a content page
+	 * @param fileName Name of the file containing the screen's content
+	 * @param panel The JPanel representing the content screen (must be set with a MigLayout)
+	 */
+	protected void createTextEdit() {
+		TextEditor textEditor = new TextEditor();
+		add(textEditor, "grow, push"); //How to fill both the width and height?
+		//add(textEdit);
+
+		
+		/*
+		JTextPane content = new JTextPane(); //Change this to the TextEditor?
+		content.setEditable(false);
+		content.setContentType("text/html");
+		
+        try {
+            BufferedReader br = new BufferedReader(new InputStreamReader(
+            		Main.class.getResourceAsStream(fileName), StandardCharsets.UTF_8));
+            StringBuilder sb = new StringBuilder();
+            String line = br.readLine();
+            
+            while (line != null) {
+            	sb.append(line);
+            	line = br.readLine();
+            }
+            
+            String everything = sb.toString();
+            content.setText(everything);
+            br.close();         
+        }
+        catch(FileNotFoundException e) { e.printStackTrace(); }
+        catch(IOException e) {e.printStackTrace();}
+		
+		final JScrollPane contentScroll = new JScrollPane(content);
+		//contentScroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+		contentScroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS); 
+		SwingUtilities.invokeLater(new Runnable() { //This is the only way I can get the JScrollPane to default to a 0 value...
+			   public void run() { 
+				   contentScroll.getVerticalScrollBar().setValue(0);
+			   }
+			});
+		add(contentScroll, "push, grow, wrap");
+		*/
+	}
+	
 	
 	
 	/**

@@ -64,9 +64,11 @@ public class CTHandbook {
 		// === CLEVERTECH LOGO CONFIGURATIONS ===
 		logo.setBackground(Color.WHITE);
 		
+		
 		// === DIGITAL HANDBOOK LABEL CONFIGURATIONS ===
 		subtitle.setFont(new Font("Arial", Font.BOLD, 20));
 		subtitle.setForeground(Color.decode("0x242424"));
+		
 		
 		// === BUTTON CONFIGURATIONS ===
 		configButton(managerBtn);
@@ -91,6 +93,7 @@ public class CTHandbook {
 			}
 		});
 		
+		
 		// === MAIN MENU CONFIGURATIONS ===
 		homeMenu.setBackground(Color.WHITE);
 		homeMenu.setLayout(new MigLayout("align 50% 50%, gapy 10"));
@@ -103,6 +106,7 @@ public class CTHandbook {
 		btnArea.add(salesBarBtn, "gapright 5");
 		btnArea.add(technicianBtn);
 		homeMenu.add(btnArea, "wrap, center");
+		
 		
 		// === JFRAME CONFIGRATIONS ===
 	    frame.getContentPane().setPreferredSize(new Dimension(PREF_WIDTH, PREF_HEIGHT)); //HARD-CODED DIMENSIONS

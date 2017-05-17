@@ -7,6 +7,8 @@ public class OpeningStoreCLContent extends MenuItemContent {
 	public OpeningStoreCLContent(final JPanel backMenuScreen, final CardLayout backMenuScreenCl) {
 		super(backMenuScreen, backMenuScreenCl);
 		createHeader("Opening Store Checklist");
-		fillBasicContent("screen_content/opening_store_checklist.html");
+		//fillBasicContent("screen_content/opening_store_checklist.html");
+		createTextEdit();
+
 	}
 }
