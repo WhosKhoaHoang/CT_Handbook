@@ -7,6 +7,7 @@ public class ClosingStoreCL extends MenuItemContent {
 	public ClosingStoreCL(JPanel backMenuScreen, CardLayout backMenuScreenCl) {
 		super(backMenuScreen, backMenuScreenCl);
 		createHeader("Closing Store Checklist");
-		fillBasicContent("screen_content/closing_store_checklist.html");
+		//fillBasicContent("screen_content/closing_store_checklist.html");
+		createTextEdit();
 	}
 }

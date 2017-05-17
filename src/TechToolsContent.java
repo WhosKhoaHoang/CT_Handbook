@@ -9,6 +9,9 @@ public class TechToolsContent extends MenuItemContent {
 	public TechToolsContent(JPanel backMenuScreen, CardLayout backMenuScreenCl) {
 		super(backMenuScreen, backMenuScreenCl);
 		createHeader("Tech Tools");
-		fillBasicContent("screen_content/tech_tools.html");	}
+		//fillBasicContent("screen_content/tech_tools.html");	
+		createTextEdit();
+
+	}
 
 }

@@ -7,6 +7,7 @@ public class PickUpDropOffProcContent extends MenuItemContent {
 	public PickUpDropOffProcContent(JPanel backMenuScreen, CardLayout backMenuScreenCl) {
 		super(backMenuScreen, backMenuScreenCl);
 		createHeader("Pick-Up/Drop-Off Procedures");
-		fillBasicContent("screen_content/pickup_and_dropoff_procedures.html");
+		//fillBasicContent("screen_content/pickup_and_dropoff_procedures.html");
+		createTextEdit();
 	}
 }

@@ -20,7 +20,8 @@ public class CompanyWOContent extends MenuItemContent {
 	public CompanyWOContent(JPanel backMenuScreen, CardLayout backMenuScreenCl) {
 		super(backMenuScreen, backMenuScreenCl);
 		createHeader("COMPANY WORK ORDER TEMPLATE");
-		fillBasicContent("screen_content/company_WO.html");
+		//fillBasicContent("screen_content/company_WO.html");
+		createTextEdit();
 		addTextToCBBtn();
 	}
 	

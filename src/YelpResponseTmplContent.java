@@ -8,6 +8,8 @@ public class YelpResponseTmplContent extends MenuItemContent {
 	public YelpResponseTmplContent(JPanel backMenuScreen, CardLayout backMenuScreenCl) {
 		super(backMenuScreen, backMenuScreenCl);
 		createHeader("Yelp Response Template");
-		fillBasicContent("screen_content/yelp_response_template.html");	}
+		//fillBasicContent("screen_content/yelp_response_template.html");	
+		createTextEdit();
+	}
 
 }

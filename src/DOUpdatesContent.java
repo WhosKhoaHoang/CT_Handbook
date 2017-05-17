@@ -7,6 +7,7 @@ public class DOUpdatesContent extends MenuItemContent {
 	public DOUpdatesContent(JPanel backMenuScreen, CardLayout backMenuScreenCl) {
 		super(backMenuScreen, backMenuScreenCl);
 		createHeader("Drop-Off Updates");
-		fillBasicContent("screen_content/dropoff_updates.html");
+		//fillBasicContent("screen_content/dropoff_updates.html");
+		createTextEdit();
 	}
 }

@@ -7,7 +7,8 @@ public class DonorBoardContent extends MenuItemContent {
 	public DonorBoardContent(JPanel backMenuScreen, CardLayout backMenuScreenCl) {
 		super(backMenuScreen, backMenuScreenCl);
 		createHeader("Donor Board Procedures");
-		fillBasicContent("screen_content/donor_board_procedures.html");	
+		//fillBasicContent("screen_content/donor_board_procedures.html");
+		createTextEdit();
 	}
 
 }

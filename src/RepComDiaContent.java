@@ -9,7 +9,7 @@ public class RepComDiaContent extends MenuItemContent {
 	public RepComDiaContent(JPanel backMenuScreen, CardLayout backMenuScreenCl) {
 		super(backMenuScreen, backMenuScreenCl);
 		createHeader("DIALOGUE REPAIR COMPLETE");
-		fillComponentContent(backMenuScreen, backMenuScreenCl, "screen_content/repair_completion_dialogue.html",
-				"FOLLOW COMPLETE REPAIR", "complete_repair_screen");	}
-
+		//fillComponentContent(backMenuScreen, backMenuScreenCl, "screen_content/repair_completion_dialogue.html", "FOLLOW COMPLETE REPAIR", "complete_repair_screen");	
+		createTextEdit();	
+	}
 }

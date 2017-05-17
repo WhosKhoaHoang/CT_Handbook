@@ -7,6 +7,7 @@ public class OnsitePhoneRepContent extends MenuItemContent {
 	public OnsitePhoneRepContent(JPanel backMenuScreen, CardLayout backMenuScreenCl) {
 		super(backMenuScreen, backMenuScreenCl);
 		createHeader("On-Site Phone Repairs");
-		fillBasicContent("screen_content/onsite_phone_repairs.html");
+		//fillBasicContent("screen_content/onsite_phone_repairs.html");
+		createTextEdit();
 	}
 }

@@ -8,7 +8,8 @@ public class RecMailProcContent extends MenuItemContent {
 	public RecMailProcContent(JPanel backMenuScreen, CardLayout backMenuScreenCl) {
 		super(backMenuScreen, backMenuScreenCl);
 		createHeader("Receiving Mail Operations");
-		fillBasicContent("screen_content/receiving_mail_operations.html");
+		//fillBasicContent("screen_content/receiving_mail_operations.html");
+		createTextEdit();
 	}
 
 }

@@ -20,7 +20,8 @@ public class WorksheetsContent extends MenuItemContent {
 	public WorksheetsContent(JPanel backMenuScreen, CardLayout backMenuScreenCl) {
 		super(backMenuScreen, backMenuScreenCl);
 		createHeader("Worksheets");
-		fillBasicContent("screen_content/worksheets.html");
+		//fillBasicContent("screen_content/worksheets.html");
+		createTextEdit();
 	}
 
 	@Override

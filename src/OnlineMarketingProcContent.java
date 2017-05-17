@@ -7,7 +7,8 @@ public class OnlineMarketingProcContent extends MenuItemContent {
 	public OnlineMarketingProcContent(JPanel backMenuScreen, CardLayout backMenuScreenCl) {
 		super(backMenuScreen, backMenuScreenCl);
 		createHeader("Online Marketing Procedures");
-		fillBasicContent("screen_content/online_marketing.html");
+		//fillBasicContent("screen_content/online_marketing.html");
+		createTextEdit();
 	}
 
 }

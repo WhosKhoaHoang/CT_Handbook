@@ -7,7 +7,8 @@ public class TechRepairProcContent extends MenuItemContent {
 	public TechRepairProcContent(JPanel backMenuScreen, CardLayout backMenuScreenCl) {
 		super(backMenuScreen, backMenuScreenCl);
 		createHeader("All Technician Repair Procedures");
-		fillBasicContent("screen_content/technician_repair_procedures.html");
+		//fillBasicContent("screen_content/technician_repair_procedures.html");
+		createTextEdit();
 	}
 
 }

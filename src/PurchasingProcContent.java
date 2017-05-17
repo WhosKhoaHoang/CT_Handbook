@@ -7,6 +7,7 @@ public class PurchasingProcContent extends MenuItemContent {
 	public PurchasingProcContent(JPanel backMenuScreen, CardLayout backMenuScreenCl) {
 		super(backMenuScreen, backMenuScreenCl);
 		createHeader("Purchasing Procedures");
-		fillBasicContent("screen_content/purchasing_procedures.html");	
+		//fillBasicContent("screen_content/purchasing_procedures.html");	
+		createTextEdit();
 	}
 }

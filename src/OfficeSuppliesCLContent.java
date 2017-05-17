@@ -19,7 +19,8 @@ public class OfficeSuppliesCLContent extends MenuItemContent{
 	public OfficeSuppliesCLContent(JPanel backMenuScreen, CardLayout backMenuScreenCl) {
 		super(backMenuScreen, backMenuScreenCl);
 		createHeader("Office Supplies Checklist");
-		fillBasicContent("screen_content/office_supplies_checklist.html");
+		//fillBasicContent("screen_content/office_supplies_checklist.html");
+		createTextEdit();
 	}
 	
 	@Override
