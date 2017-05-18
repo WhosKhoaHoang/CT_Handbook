@@ -9,7 +9,13 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
@@ -187,23 +193,11 @@ public class TextEditor extends JPanel {
 		
 		
 		// ############################## MY CUSTOM BUTTONS ##############################
-		JButton printToConsBtn = new JButton("Print To Console");
-		//printToConsBtn.addActionListener(new PrintToConsoleActionListener());
-		
-		JButton readFileBtn = new JButton("Read From File");
-		//readFileBtn.addActionListener(new ReadFileActionListener());
-		
-		JButton writeFileBtn = new JButton("Write To File");
-		//writeFileBtn.addActionListener(new WriteFileActionListener());
-		
-		JButton insertDbBtn = new JButton("Insert Into Database");
-		//insertDbBtn.addActionListener(new InsertIntoDbActionListener());
-		
 		JButton readDbBtn = new JButton("Read Database");
-		//readDbBtn.addActionListener(new ReadDbActionListener());
+		readDbBtn.addActionListener(new ReadDbActionListener());
 		
 		JButton updateDbBtn = new JButton("Update Database");
-		//updateDbBtn.addActionListener(new UpdateDbActionListener());
+		updateDbBtn.addActionListener(new UpdateDbActionListener());
 		// FOCUS
 		// ######### Perhaps provide argument to UpdateDBActionListener to specify what category needs to be updated? #########
 
@@ -234,8 +228,8 @@ public class TextEditor extends JPanel {
 		
 		// ====== Second Row ======
 		JPanel panel2 = new JPanel(new FlowLayout(FlowLayout.LEFT));
+		panel2.add(fontFamilyComboBox__);	
 		panel2.add(new JSeparator(SwingConstants.VERTICAL));
-		panel2.add(fontFamilyComboBox__);		
 		panel2.add(insertPictureButton);
 		panel2.add(deletePictureButton);
 		panel2.add(new JSeparator(SwingConstants.VERTICAL));
@@ -260,14 +254,9 @@ public class TextEditor extends JPanel {
 		panel3.add(redoButton);
 		*/
 		// (My Custom Buttons)
-		panel3.add(printToConsBtn);
-		/*
-		panel3.add(readFileBtn);
-		panel3.add(writeFileBtn);
 		panel3.add(readDbBtn);
 		panel3.add(updateDbBtn);
-		panel3.add(insertDbBtn);
-		*/
+
 		
 		
 		// ===== Add contents to toolbar panel =====		
@@ -297,6 +286,66 @@ public class TextEditor extends JPanel {
 	}
 	
 	
+	private class ReadDbActionListener implements ActionListener {
+		
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			
+			//Note how you're not writing anything to a file here, which is good.
+			DBConnect connect = new DBConnect();
+			ResultSet rs = connect.getData();
+			
+			//Want rtf? Change this to text/rtf
+			editor__.setContentType("text/rtf");
+			//Want rtf? Change this to DefaultStyledDocument
+	        Document doc = new DefaultStyledDocument();
+			InputStream is;
+			try {
+				rs.next(); //Should I be saying if (rs.next()) { }? But isn't something always gonna be there cuz I put it there?
+
+				is = rs.getBlob("content").getBinaryStream();
+				editor__.getEditorKit().read(is,doc,0);
+		        is.close();
+
+			} catch (SQLException | IOException | BadLocationException e2) {
+				// TODO Auto-generated catch block
+				e2.printStackTrace();
+			}
+	        editor__.setDocument(doc);
+
+	        System.out.println(editor__.getEditorKit());
+			
+			connect.close();
+		}
+	}
+	
+
+	//YOU CURRENTLY HARD-CODE THE ID OF THE ROW TO UPDATE!!!
+	private class UpdateDbActionListener implements ActionListener {
+		
+		@Override
+		public void actionPerformed(ActionEvent e) {			
+			
+			ByteArrayOutputStream out = new ByteArrayOutputStream();
+			DBConnect connect = new DBConnect();
+	        try {
+				Document doc = editor__.getDocument(); //No longer DefaultStyleDocument at this point?
+				editor__.getEditorKit().write(out,doc,0,doc.getLength());
+				out.flush(); out.close();
+				connect.updateData(new ByteArrayInputStream(out.toByteArray()));
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			} catch (BadLocationException e1) {
+				e1.printStackTrace();
+			}
+	        finally {
+				connect.close();
+	        }
+
+		}
+	}
+	
+	
 	/*
 	 * Returns a collection of Font names that are available from the
 	 * system fonts and are matched with the desired font list (FONT_LIST).
@@ -321,6 +370,7 @@ public class TextEditor extends JPanel {
 	
 	private StyledDocument getEditorDocument() {
 		
+		editor__.setContentType("text/rtf"); //Set content type of editor to RTF here...
 		StyledDocument doc = (DefaultStyledDocument) editor__.getDocument();
 		return doc;
 	}
@@ -1634,7 +1684,7 @@ public class TextEditor extends JPanel {
 							doc.remove(element.getStartOffset(), 1); // length = 1
 						}
 						catch (BadLocationException ex_) {
-			
+
 							throw new RuntimeException(ex_);
 						}
 					}
