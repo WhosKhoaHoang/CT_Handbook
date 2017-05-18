@@ -25,20 +25,16 @@ import javax.swing.*;
 import javax.swing.border.*;
 import javax.swing.event.CaretEvent;
 import javax.swing.event.CaretListener;
-import javax.swing.event.UndoableEditEvent;
-import javax.swing.event.UndoableEditListener;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.text.*;
 import javax.swing.text.DefaultEditorKit.CopyAction;
 import javax.swing.text.DefaultEditorKit.CutAction;
 import javax.swing.text.DefaultEditorKit.PasteAction;
-import javax.swing.text.StyledEditorKit.AlignmentAction;
 import javax.swing.text.StyledEditorKit.BoldAction;
 import javax.swing.text.StyledEditorKit.FontFamilyAction;
 import javax.swing.text.StyledEditorKit.FontSizeAction;
 import javax.swing.text.StyledEditorKit.ItalicAction;
 import javax.swing.text.StyledEditorKit.UnderlineAction;
-import javax.swing.undo.UndoManager;
 import javax.swing.plaf.nimbus.NimbusLookAndFeel;
 
 import net.miginfocom.swing.MigLayout;
@@ -51,9 +47,7 @@ public class TextEditor extends JPanel {
 	private JPanel curPanel = this;
 	
 	private JComboBox<String> fontSizeComboBox__;
-	private JComboBox<String> textAlignComboBox__;
 	private JComboBox<String> fontFamilyComboBox__;
-	private UndoManager undoMgr__;
 	private String pictureButtonName__;
 	//private File file__; //Not gonna including saving to local filesystem...
 
@@ -70,10 +64,6 @@ public class TextEditor extends JPanel {
 	// is at the first text position after the number (number + dot + space).
 	// Alse see EditorCaretListener and NumbersParaKeyListener.		
 	private boolean startPosPlusNum__;
-	
-	//private static final String MAIN_TITLE = "My Editor 1";
-	//private static final String DEFAULT_FONT_FAMILY = "SansSerif";
-	//private static final int DEFAULT_FONT_SIZE = 18;
 	
 	private static final List<String> FONT_LIST = Arrays.asList(new String [] {"Arial", "Calibri", "Cambria", "Courier New", "Comic Sans MS", "Dialog", "Georgia", "Helevetica", "Lucida Sans", "Monospaced", "Tahoma", "Times New Roman", "Verdana"});
 	private static final String [] FONT_SIZES  = {"Font Size", "12", "14", "16", "18", "20", "22", "24", "26", "28", "30"};
@@ -106,7 +96,6 @@ public class TextEditor extends JPanel {
 		editor__.addKeyListener(new NumbersParaKeyListener());
 		editor__.addCaretListener(new EditorCaretListener());
 
-		undoMgr__ = new UndoManager();
 		EditButtonActionListener editButtonActionListener = new EditButtonActionListener();
 
 		// ############################## CUT/COPY/PASTE BUTTONS ##############################
@@ -153,10 +142,6 @@ public class TextEditor extends JPanel {
 		colorButton.addActionListener(new ColorActionListener());
 
 		// ===== Combo Box Stuff =====
-		textAlignComboBox__ = new JComboBox<String>(TEXT_ALIGNMENTS);
-		textAlignComboBox__.setEditable(false);
-		textAlignComboBox__.addItemListener(new TextAlignItemListener());
-		
 		fontSizeComboBox__ = new JComboBox<String>(FONT_SIZES);
 		fontSizeComboBox__.setEditable(false);
 		fontSizeComboBox__.addItemListener(new FontSizeItemListener());
@@ -173,13 +158,6 @@ public class TextEditor extends JPanel {
 		insertPictureButton.addActionListener(new PictureInsertActionListener());
 		JButton deletePictureButton = new JButton("Picture Delete");
 		deletePictureButton.addActionListener(new PictureDeleteActionListener());
-		
-		
-		// ############################## UNDO/REDO BUTTONS ##############################
-		JButton undoButton = new JButton("Undo");
-		undoButton.addActionListener(new UndoActionListener("UNDO"));
-		JButton redoButton = new JButton("Redo");
-		redoButton.addActionListener(new UndoActionListener("REDO"));
 		
 		JButton bulletInsertButton = new JButton("Bullets Insert");
 		bulletInsertButton.addActionListener(new BulletActionListener(BulletActionType.INSERT));
@@ -281,7 +259,7 @@ public class TextEditor extends JPanel {
 	private StyledDocument getNewDocument() {
 		
 		StyledDocument doc = new DefaultStyledDocument();
-		doc.addUndoableEditListener(new UndoEditListener());
+		//doc.addUndoableEditListener(new UndoEditListener());
 		return doc;
 	}
 	
@@ -386,16 +364,6 @@ public class TextEditor extends JPanel {
 	}
 	
 	
-	private class UndoEditListener implements UndoableEditListener {
-
-		@Override
-		public void undoableEditHappened(UndoableEditEvent e) {
-
-			undoMgr__.addEdit(e.getEdit()); // remember the edit
-		}
-	}
-
-	
 	private class ColorActionListener implements ActionListener {
 		
 		public void actionPerformed(ActionEvent e) {
@@ -414,45 +382,6 @@ public class TextEditor extends JPanel {
 			editor__.requestFocusInWindow();
 		}
 	}
-	
-	
-	private class UndoActionListener implements ActionListener {
-		
-		private String type;
-	
-		public UndoActionListener(String type) {
-		
-			this.type = type;
-		}
-
-		@Override
-		public void actionPerformed(ActionEvent e) {
-
-			switch (type) {
-			
-				case "UNDO":
-					if (! undoMgr__.canUndo()) {
-				
-						editor__.requestFocusInWindow();
-						return; // no edits to undo
-					}
-
-					undoMgr__.undo();
-					break;
-					
-				case "REDO":
-					if (! undoMgr__.canRedo()) {
-				
-						editor__.requestFocusInWindow();
-						return; // no edits to redo
-					}
-
-					undoMgr__.redo();
-			}
-
-			editor__.requestFocusInWindow();
-		}
-	} // UndoActionListener
 	
 	
 	
@@ -1527,28 +1456,6 @@ public class TextEditor extends JPanel {
 			editor__.requestFocusInWindow();
 		}
 	}
-	
-	
-	private class TextAlignItemListener implements ItemListener {
-
-		@Override
-		public void itemStateChanged(ItemEvent e) {
-
-			if ((e.getStateChange() != ItemEvent.SELECTED) ||
-				(textAlignComboBox__.getSelectedIndex() == 0)) {
-			
-				return;
-			}
-			
-			String alignmentStr = (String) e.getItem();			
-			int newAlignment = textAlignComboBox__.getSelectedIndex() - 1;
-			// New alignment is set based on these values defined in StyleConstants:
-			// ALIGN_LEFT 0, ALIGN_CENTER 1, ALIGN_RIGHT 2, ALIGN_JUSTIFIED 3
-			textAlignComboBox__.setAction(new AlignmentAction(alignmentStr, newAlignment));	
-			textAlignComboBox__.setSelectedIndex(0); // initialize to (default) select
-			editor__.requestFocusInWindow();
-		}
-	} // TextAlignItemListener
 	
 	
 	private class FontSizeItemListener implements ItemListener {
