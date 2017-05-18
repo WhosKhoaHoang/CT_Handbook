@@ -40,16 +40,15 @@ import javax.swing.plaf.nimbus.NimbusLookAndFeel;
 import net.miginfocom.swing.MigLayout;
 
 
-
 public class TextEditor extends JPanel {
 	
 	private JTextPane editor__;
 	private JPanel curPanel = this;
+	private String contentCategory = "";
 	
 	private JComboBox<String> fontSizeComboBox__;
 	private JComboBox<String> fontFamilyComboBox__;
 	private String pictureButtonName__;
-	//private File file__; //Not gonna including saving to local filesystem...
 
 	enum BulletActionType {INSERT, REMOVE};
 	enum NumbersActionType {INSERT, REMOVE};
@@ -67,7 +66,6 @@ public class TextEditor extends JPanel {
 	
 	private static final List<String> FONT_LIST = Arrays.asList(new String [] {"Arial", "Calibri", "Cambria", "Courier New", "Comic Sans MS", "Dialog", "Georgia", "Helevetica", "Lucida Sans", "Monospaced", "Tahoma", "Times New Roman", "Verdana"});
 	private static final String [] FONT_SIZES  = {"Font Size", "12", "14", "16", "18", "20", "22", "24", "26", "28", "30"};
-	private static final String [] TEXT_ALIGNMENTS = {"Text Align", "Left", "Center", "Right", "Justified"};
 	private static final char BULLET_CHAR = '\u2022';
 	private static final String BULLET_STR = new String(new char [] {BULLET_CHAR});
 	private static final String BULLET_STR_WITH_SPACE = BULLET_STR + " ";
@@ -75,7 +73,7 @@ public class TextEditor extends JPanel {
 	private static final String NUMBERS_ATTR = "NUMBERS";
 	private static final String ELEM = AbstractDocument.ElementNameAttribute;
 	private static final String COMP = StyleConstants.ComponentElementName;
-
+	
 	
 	//DEFINE THE CONSTRUCTOR!
 	public TextEditor() {
@@ -178,6 +176,8 @@ public class TextEditor extends JPanel {
 		updateDbBtn.addActionListener(new UpdateDbActionListener());
 		// FOCUS
 		// ######### Perhaps provide argument to UpdateDBActionListener to specify what category needs to be updated? #########
+		//   - No, not an argument to those guys. That won't work. Make an instance variable for this TextEditor that can be
+		//      accessed in those Action Listeners...That instance variable is contentCategory
 
 		
 		// ############################## PANEL FOR TOOLBAR PANEL ##############################
@@ -193,16 +193,8 @@ public class TextEditor extends JPanel {
 		panel1.add(underlineButton);
 		panel1.add(new JSeparator(SwingConstants.VERTICAL));	
 		panel1.add(colorButton);
-		/*
-		panel1.add(new JSeparator(SwingConstants.VERTICAL));
-		panel1.add(textAlignComboBox__);
-		*/
 		panel1.add(new JSeparator(SwingConstants.VERTICAL));
 		panel1.add(fontSizeComboBox__);
-		/*
-		panel1.add(new JSeparator(SwingConstants.VERTICAL));
-		panel1.add(fontFamilyComboBox__);
-		*/
 		
 		// ====== Second Row ======
 		JPanel panel2 = new JPanel(new FlowLayout(FlowLayout.LEFT));
@@ -214,27 +206,15 @@ public class TextEditor extends JPanel {
 		panel2.add(bulletInsertButton);
 		panel2.add(bulletRemoveButton);
 		panel2.add(new JSeparator(SwingConstants.VERTICAL));
-		/*
-		panel2.add(numbersInsertButton);
-		panel2.add(numbersRemoveButton);
-		panel2.add(new JSeparator(SwingConstants.VERTICAL));
-		panel2.add(undoButton);
-		panel2.add(redoButton);
-		*/
 		
 		// ====== Third Row ======
 		JPanel panel3 = new JPanel(new FlowLayout(FlowLayout.LEFT));
 		panel3.add(numbersInsertButton);
 		panel3.add(numbersRemoveButton);
-		/*
-		panel3.add(new JSeparator(SwingConstants.VERTICAL));
-		panel3.add(undoButton);
-		panel3.add(redoButton);
-		*/
 		// (My Custom Buttons)
+		panel3.add(new JSeparator(SwingConstants.VERTICAL));
 		panel3.add(readDbBtn);
 		panel3.add(updateDbBtn);
-
 		
 		
 		// ===== Add contents to toolbar panel =====		
@@ -250,9 +230,39 @@ public class TextEditor extends JPanel {
 		add(editorScrollPane, BorderLayout.CENTER);
 
 				
-		//editor__.requestFocusInWindow(); //Do I need this?
+		editor__.requestFocusInWindow(); //Do I need this?
 
 
+	}
+	
+	
+	public TextEditor(String contentCategory) {
+		this();
+		this.contentCategory = contentCategory;	
+		
+		//Note how you're not writing anything to a file here, which is good.
+		DBConnect connect = new DBConnect();
+		ResultSet rs = connect.getData(contentCategory);
+					
+		editor__.setContentType("text/rtf"); //Want rtf? Change this to text/rtf
+        Document doc = new DefaultStyledDocument(); //Want rtf? Change this to DefaultStyledDocument
+		InputStream is;
+		try {
+			rs.next(); //Should I be saying if (rs.next()) { }? But isn't something always gonna be there cuz I put it there?
+
+			is = rs.getBlob("content").getBinaryStream();
+			editor__.getEditorKit().read(is, doc, 0);
+	        is.close();
+
+		} catch (SQLException | IOException | BadLocationException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
+        editor__.setDocument(doc);
+
+        //System.out.println(editor__.getEditorKit()); //FOR TESTING
+		connect.close();
+		
 	}
 	
 	
@@ -272,7 +282,7 @@ public class TextEditor extends JPanel {
 			//Note how you're not writing anything to a file here, which is good.
 			DBConnect connect = new DBConnect();
 			ResultSet rs = connect.getData();
-			
+						
 			//Want rtf? Change this to text/rtf
 			editor__.setContentType("text/rtf");
 			//Want rtf? Change this to DefaultStyledDocument
@@ -291,8 +301,7 @@ public class TextEditor extends JPanel {
 			}
 	        editor__.setDocument(doc);
 
-	        System.out.println(editor__.getEditorKit());
-			
+	        //System.out.println(editor__.getEditorKit()); //FOR TESTING
 			connect.close();
 		}
 	}
@@ -310,7 +319,10 @@ public class TextEditor extends JPanel {
 				Document doc = editor__.getDocument(); //No longer DefaultStyleDocument at this point?
 				editor__.getEditorKit().write(out,doc,0,doc.getLength());
 				out.flush(); out.close();
-				connect.updateData(new ByteArrayInputStream(out.toByteArray()));
+				
+				//connect.updateData(new ByteArrayInputStream(out.toByteArray()));
+				connect.updateData(new ByteArrayInputStream(out.toByteArray()), contentCategory); //UPDATE CONTENT CATEGORY!!!
+
 			} catch (IOException e1) {
 				e1.printStackTrace();
 			} catch (BadLocationException e1) {

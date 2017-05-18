@@ -43,6 +43,26 @@ public class DBConnect {
 	}
 
 	
+	//FOR GETTING PARTICULAR RECORDS
+	public ResultSet getData(String contentCategory) {
+		
+		ResultSet rs = null;
+		try {
+			String query = "SELECT * FROM panel_content WHERE category='"+contentCategory+"'";
+			rs = st.executeQuery(query);
+			
+			//PreparedStatement pstmt = con.prepareStatement("SELECT * FROM panel_content WHERE category=?");
+			//pstmt.setString(1, contentCategory);
+			//pstmt.executeUpdate();
+			//Note that you can't actually executeUpdate() for SELECT statements lol...
+
+		} catch(Exception e) {
+			System.out.println(e);
+		}
+		
+		return rs;
+	}
+	
 	
 	public void updateData(InputStream is) {
 		try {
@@ -50,6 +70,22 @@ public class DBConnect {
 			//^HARD-CODED ID (42 for local, 5 for GoDaddy)
 			
 		    pstmt.setBlob(1, is);
+		    pstmt.executeUpdate();
+					    
+		} catch(Exception e) {
+			System.out.println(e);
+		}
+	}
+	
+	//FOR UPDATING SPECIFIC RECORDS
+	public void updateData(InputStream is, String contentCategory) {
+		try {
+			PreparedStatement pstmt = con.prepareStatement("UPDATE panel_content SET content=? WHERE category=?"); 
+			//^HARD-CODED ID (42 for local, 5 for GoDaddy)
+			
+		    pstmt.setBlob(1, is);
+		    pstmt.setString(2, contentCategory);
+		    
 		    pstmt.executeUpdate();
 					    
 		} catch(Exception e) {

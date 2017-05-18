@@ -11,8 +11,10 @@ public class OpeningStoreCLContent extends MenuItemContent {
 		
 		// FOCUS
 		// ######### Connect to database and pull contents to put into the content window? #########
-		createTextEdit();
+		//   - Would need to pass argument to createTextEdit (a method in MenuItemContent), something like
+		//      createTextEdit("opening_store_CL")
+		//createTextEdit();
 
-
+		createTextEdit("opening_store_CL");
 	}
 }

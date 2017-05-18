@@ -112,14 +112,25 @@ public class MenuItemContent extends JPanel {
 	/**
 	 * A helper method that creates the text editor portion of a content page
 	 */
+	//NOTE: Will probably get rid of this no-arg version
 	protected void createTextEdit() {
 		// FOCUS
 		// ######### Pass an argument to this method that will be passed to TextEditor to let it know what content to show? #########
-		TextEditor textEditor = new TextEditor();
+		TextEditor textEditor = new TextEditor(); //Ultimately might need to say something like TextEditor("category_of_content")
 		add(textEditor, "grow, push, wrap"); //How to fill both the width and height? with grow, push!!!
-		//add(textEdit);
 	}
 	
+	
+	protected void createTextEdit(String contentCategory) {
+		// FOCUS
+		// ######### Pass an argument to this method that will be passed to TextEditor to let it know what content to show? #########
+		TextEditor textEditor = new TextEditor(contentCategory); //Ultimately might need to say something like TextEditor("category_of_content")
+		
+		//Perhaps I can populate text content write here?
+		//textEditor.update
+		
+		add(textEditor, "grow, push, wrap"); //How to fill both the width and height? with grow, push!!!
+	}
 	
 	
 	/**
