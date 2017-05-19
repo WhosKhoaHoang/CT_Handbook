@@ -20,7 +20,8 @@ public class OfficeSuppliesCLContent extends MenuItemContent{
 		super(backMenuScreen, backMenuScreenCl);
 		createHeader("Office Supplies Checklist");
 		//fillBasicContent("screen_content/office_supplies_checklist.html");
-		createTextEdit();
+		//createTextEdit();
+		createTextEdit("office_supp_CL");
 	}
 	
 	@Override

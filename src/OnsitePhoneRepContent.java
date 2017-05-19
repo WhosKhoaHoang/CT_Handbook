@@ -8,6 +8,7 @@ public class OnsitePhoneRepContent extends MenuItemContent {
 		super(backMenuScreen, backMenuScreenCl);
 		createHeader("On-Site Phone Repairs");
 		//fillBasicContent("screen_content/onsite_phone_repairs.html");
-		createTextEdit();
+		//createTextEdit();
+		createTextEdit("onsite_phone_rpr");
 	}
 }

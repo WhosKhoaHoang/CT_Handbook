@@ -8,6 +8,7 @@ public class PickUpDiaContent extends MenuItemContent {
 		super(backMenuScreen, backMenuScreenCl);
 		createHeader("DIALOGUE FOR PICK-UP");	
 		//fillComponentContent(backMenuScreen, backMenuScreenCl, "screen_content/pickup_dialogue.html", "FOLLOW PICK-UP SIGNATURE", "pickup_signature_screen");
-		createTextEdit();
+		//createTextEdit();
+		createTextEdit("pickup_dialogue");
 	}
 }

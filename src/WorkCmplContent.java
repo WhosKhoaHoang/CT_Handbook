@@ -8,7 +8,8 @@ public class WorkCmplContent extends MenuItemContent {
 		super(backMenuScreen, backMenuScreenCl);
 		createHeader("WORK COMPLETED TEXT");
 		//fillComponentContent(backMenuScreen, backMenuScreenCl,"screen_content/work_completed_text.html", "FOLLOW DIALOGUE FOR APPROVAL", "approval_dialogue_screen");	
-		createTextEdit();
+		//createTextEdit();
+		createTextEdit("work_cmpl");
 	}
 
 }

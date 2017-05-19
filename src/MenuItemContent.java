@@ -122,6 +122,9 @@ public class MenuItemContent extends JPanel {
 	
 	
 	protected void createTextEdit(String contentCategory) {
+		
+		//System.out.println(contentCategory);
+		
 		// FOCUS
 		// ######### Pass an argument to this method that will be passed to TextEditor to let it know what content to show? #########
 		TextEditor textEditor = new TextEditor(contentCategory); //Ultimately might need to say something like TextEditor("category_of_content")
@@ -235,7 +238,8 @@ public class MenuItemContent extends JPanel {
 		JButton copyTxtBtn = new JButton("Copy text to clipboard");
 		add(copyTxtBtn);
 		
-		final int JSCROLLPANE_COMPONENT_INDEX = 1;
+		final int JSCROLLPANE_COMPONENT_INDEX = 1; 
+		//^I.e., the index of the JScrollPane in the set of MenuItemContent's children
 		copyTxtBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				HTMLToText parser = new HTMLToText();

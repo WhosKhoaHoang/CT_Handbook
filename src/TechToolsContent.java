@@ -10,8 +10,9 @@ public class TechToolsContent extends MenuItemContent {
 		super(backMenuScreen, backMenuScreenCl);
 		createHeader("Tech Tools");
 		//fillBasicContent("screen_content/tech_tools.html");	
-		createTextEdit();
+		//createTextEdit();
 
+		createTextEdit("tech_tools");
 	}
 
 }

@@ -8,7 +8,8 @@ public class OnlineMarketingProcContent extends MenuItemContent {
 		super(backMenuScreen, backMenuScreenCl);
 		createHeader("Online Marketing Procedures");
 		//fillBasicContent("screen_content/online_marketing.html");
-		createTextEdit();
+		//createTextEdit();
+		createTextEdit("online_marketing_proc");
 	}
 
 }

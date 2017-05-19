@@ -8,6 +8,7 @@ public class PurchasingProcContent extends MenuItemContent {
 		super(backMenuScreen, backMenuScreenCl);
 		createHeader("Purchasing Procedures");
 		//fillBasicContent("screen_content/purchasing_procedures.html");	
-		createTextEdit();
+		//createTextEdit();
+		createTextEdit("purchase_proc");
 	}
 }

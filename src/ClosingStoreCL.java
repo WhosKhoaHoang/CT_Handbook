@@ -8,6 +8,7 @@ public class ClosingStoreCL extends MenuItemContent {
 		super(backMenuScreen, backMenuScreenCl);
 		createHeader("Closing Store Checklist");
 		//fillBasicContent("screen_content/closing_store_checklist.html");
-		createTextEdit();
+		//createTextEdit();
+		createTextEdit("close_store_CL");
 	}
 }

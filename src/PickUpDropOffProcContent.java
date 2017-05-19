@@ -8,6 +8,7 @@ public class PickUpDropOffProcContent extends MenuItemContent {
 		super(backMenuScreen, backMenuScreenCl);
 		createHeader("Pick-Up/Drop-Off Procedures");
 		//fillBasicContent("screen_content/pickup_and_dropoff_procedures.html");
-		createTextEdit();
+		//createTextEdit();
+		createTextEdit("pickup_dropoff");
 	}
 }

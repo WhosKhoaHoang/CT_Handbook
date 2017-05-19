@@ -12,7 +12,8 @@ public class PhoneCallProcContent extends MenuItemContent {
 		//FOR TESTING
 		//fillComponentContent(backMenuScreen, backMenuScreenCl,"screen_content/phone_call_procedures2.html", "FOLLOW YELP RESPONSE TEMPLATES", "yelp_response_template");
 		
-		createTextEdit();
+		//createTextEdit();
+		createTextEdit("phone_call_proc");
 
 	}
 }

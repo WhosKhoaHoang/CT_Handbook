@@ -313,6 +313,17 @@ public class TextEditor extends JPanel {
 		@Override
 		public void actionPerformed(ActionEvent e) {			
 			
+			//For testing: Get all the text:
+			//System.out.println(editor__.getText());
+			/*
+			try {
+				System.out.println(getEditorDocument().getText(0, getEditorDocument().getLength()));
+			} catch (BadLocationException e2) {
+				// TODO Auto-generated catch block
+				e2.printStackTrace();
+			}
+			*/
+						
 			ByteArrayOutputStream out = new ByteArrayOutputStream();
 			DBConnect connect = new DBConnect();
 	        try {
@@ -358,7 +369,7 @@ public class TextEditor extends JPanel {
 	}
 	
 	
-	private StyledDocument getEditorDocument() {
+	private StyledDocument getEditorDocument() { //Document itself is a distinct entity from the editor?
 		
 		editor__.setContentType("text/rtf"); //Set content type of editor to RTF here...
 		StyledDocument doc = (DefaultStyledDocument) editor__.getDocument();

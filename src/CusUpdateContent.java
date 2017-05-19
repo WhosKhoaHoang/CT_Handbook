@@ -8,6 +8,6 @@ public class CusUpdateContent extends MenuItemContent {
 		super(backMenuScreen, backMenuScreenCl);
 		createHeader("CUSTOMERS UPDATE TEXT");
 		//fillBasicContent("screen_content/customers_update_text.html");	
-		createTextEdit();
+		createTextEdit("cus_update");
 	}
 }

@@ -8,6 +8,7 @@ public class DOUpdatesContent extends MenuItemContent {
 		super(backMenuScreen, backMenuScreenCl);
 		createHeader("Drop-Off Updates");
 		//fillBasicContent("screen_content/dropoff_updates.html");
-		createTextEdit();
+		//createTextEdit();
+		createTextEdit("DO_updates");
 	}
 }

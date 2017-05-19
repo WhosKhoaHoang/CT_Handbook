@@ -9,6 +9,7 @@ public class InventoryCheckProcContent extends MenuItemContent {
 		super(backMenuScreen, backMenuScreenCl);
 		createHeader("Inventory Check Procedures");
 		//fillBasicContent("screen_content/inventory_check_procedures.html");
-		createTextEdit();
+		//createTextEdit();
+		createTextEdit("inven_check_proc");
 	}
 }

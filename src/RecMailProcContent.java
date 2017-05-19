@@ -9,7 +9,8 @@ public class RecMailProcContent extends MenuItemContent {
 		super(backMenuScreen, backMenuScreenCl);
 		createHeader("Receiving Mail Operations");
 		//fillBasicContent("screen_content/receiving_mail_operations.html");
-		createTextEdit();
+		//createTextEdit();
+		createTextEdit("rec_mail_ops");
 	}
 
 }

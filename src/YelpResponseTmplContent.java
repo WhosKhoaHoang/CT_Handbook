@@ -9,7 +9,8 @@ public class YelpResponseTmplContent extends MenuItemContent {
 		super(backMenuScreen, backMenuScreenCl);
 		createHeader("Yelp Response Template");
 		//fillBasicContent("screen_content/yelp_response_template.html");	
-		createTextEdit();
+		//createTextEdit();
+		createTextEdit("yelp_resp");
 	}
 
 }

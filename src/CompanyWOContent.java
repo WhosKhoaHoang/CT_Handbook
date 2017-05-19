@@ -21,7 +21,8 @@ public class CompanyWOContent extends MenuItemContent {
 		super(backMenuScreen, backMenuScreenCl);
 		createHeader("COMPANY WORK ORDER TEMPLATE");
 		//fillBasicContent("screen_content/company_WO.html");
-		createTextEdit();
+		//createTextEdit();
+		createTextEdit("company_WO");
 		addTextToCBBtn();
 	}
 	

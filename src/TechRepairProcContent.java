@@ -8,7 +8,8 @@ public class TechRepairProcContent extends MenuItemContent {
 		super(backMenuScreen, backMenuScreenCl);
 		createHeader("All Technician Repair Procedures");
 		//fillBasicContent("screen_content/technician_repair_procedures.html");
-		createTextEdit();
+		//createTextEdit();
+		createTextEdit("tech_rpr_procs");
 	}
 
 }

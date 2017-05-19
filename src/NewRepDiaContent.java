@@ -9,6 +9,6 @@ public class NewRepDiaContent extends MenuItemContent {
 		super(backMenuScreen, backMenuScreenCl); //Do I even need ops_main_screen here? Isn't this always gonna be the case?
 		createHeader("DIALOGUE FOR NEW REPAIR");
 		//fillComponentContent(backMenuScreen, backMenuScreenCl, "screen_content/new_repair_dialogue.html", "FOLLOW WALK-IN-TEMPLATE", "walkin_work_order_screen");
-		createTextEdit();
+		createTextEdit("new_rpr_dialogue");
 	}
 }

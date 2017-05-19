@@ -12,7 +12,8 @@ public class DOSigContent extends MenuItemContent {
 		fillComponentContent(backMenuScreen, backMenuScreenCl,
 				"screen_content/drop_off_sig.html", "FOLLOW CUSTOMERS UPDATE TEXT", "customers_update_screen");
 		*/
-		createTextEdit();
+		//createTextEdit();
+		createTextEdit("DO_sig");
 		addTextToCBBtn();
 	}
 }

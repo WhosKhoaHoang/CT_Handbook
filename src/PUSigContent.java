@@ -10,7 +10,8 @@ public class PUSigContent extends MenuItemContent {
 		super(backMenuScreen, backMenuScreenCl);
 		createHeader("PICK-UP SIGNATURE");
 		//fillBasicContent("screen_content/pickup_sig.html");
-		createTextEdit();
+		//createTextEdit();
+		createTextEdit("PU_sig");
 		addTextToCBBtn();	
 		
 	}

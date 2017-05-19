@@ -26,7 +26,8 @@ public class WalkinWOContent extends MenuItemContent {
 		
 		createHeader("WALK-IN WORK ORDER TEMPLATE");	
 		//fillBasicContent("screen_content/walkinWO.html");
-		createTextEdit();
+		//createTextEdit();
+		createTextEdit("walkin_WO");
 
 		addTextToCBBtn();
 		JPanel walkinWOheader = (JPanel)getComponent(0);

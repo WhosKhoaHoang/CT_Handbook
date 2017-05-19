@@ -8,6 +8,7 @@ public class ApprDiaContent extends MenuItemContent {
 		super(backMenuScreen, backMenuScreenCl);
 		createHeader("DIALOGUE FOR APPROVAL");
 		//fillComponentContent(backMenuScreen, backMenuScreenCl, "screen_content/approval_dialogue.html", "FOLLOW CUSTOMERS UPDATE TEXT", "customers_update_screen");	
-		createTextEdit();
+		//createTextEdit();
+		createTextEdit("appr_dialogue");
 	}
 }

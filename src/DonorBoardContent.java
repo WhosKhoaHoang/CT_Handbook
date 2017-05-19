@@ -8,7 +8,8 @@ public class DonorBoardContent extends MenuItemContent {
 		super(backMenuScreen, backMenuScreenCl);
 		createHeader("Donor Board Procedures");
 		//fillBasicContent("screen_content/donor_board_procedures.html");
-		createTextEdit();
+		//createTextEdit();
+		createTextEdit("donor_board");
 	}
 
 }

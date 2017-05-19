@@ -10,6 +10,7 @@ public class RepComDiaContent extends MenuItemContent {
 		super(backMenuScreen, backMenuScreenCl);
 		createHeader("DIALOGUE REPAIR COMPLETE");
 		//fillComponentContent(backMenuScreen, backMenuScreenCl, "screen_content/repair_completion_dialogue.html", "FOLLOW COMPLETE REPAIR", "complete_repair_screen");	
-		createTextEdit();	
+		//createTextEdit();	
+		createTextEdit("rpr_cmpl_dialogue");
 	}
 }
