@@ -248,11 +248,18 @@ public class TextEditor extends JPanel {
         Document doc = new DefaultStyledDocument(); //Want rtf? Change this to DefaultStyledDocument
 		InputStream is;
 		try {
+			/*
 			rs.next(); //Should I be saying if (rs.next()) { }? But isn't something always gonna be there cuz I put it there?
 
 			is = rs.getBlob("content").getBinaryStream();
 			editor__.getEditorKit().read(is, doc, 0);
 	        is.close();
+	        */
+			if (rs.next()) {
+				is = rs.getBlob("content").getBinaryStream();
+				editor__.getEditorKit().read(is, doc, 0);
+		        is.close();
+			}
 
 		} catch (SQLException | IOException | BadLocationException e2) {
 			// TODO Auto-generated catch block

@@ -8,7 +8,7 @@ public class CmplRprContent extends MenuItemContent {
 		super(backMenuScreen, backMenuScreenCl);
 		createHeader("COMPLETE REPAIR TEXT");
 		//fillComponentContent(backMenuScreen, backMenuScreenCl, "screen_content/complete_repair_text.html", "FOLLOW DIALOGUE FOR REPAIR COMPLETION UPDATE", "repair_complete_dialogue_screen");
-		createTextEdit();
-		
+		//createTextEdit();
+		createTextEdit("cmpl_rpr_txt");
 	}
 }
