@@ -6,7 +6,7 @@ import java.sql.*;
 public class DBConnect {
 	private Connection con;
 	private Statement st; //your SQL query
-	private ResultSet rs;
+	//private ResultSet rs;
 	
 	public DBConnect() {
 		try {
@@ -15,6 +15,9 @@ public class DBConnect {
 			con = DriverManager.getConnection("jdbc:mysql://localhost/test", "root", ""); //For local
 			//^Things don't seem to work if I use port 3306?
 			//Paste the con for GoDaddy here (see DBConnect.java in Text Editor With Database)
+
+			//System.out.println("YOOOOOO");
+			
 			st = con.createStatement();
 			
 		}catch(Exception e) {

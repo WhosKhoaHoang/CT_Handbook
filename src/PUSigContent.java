@@ -12,7 +12,7 @@ public class PUSigContent extends MenuItemContent {
 		//fillBasicContent("screen_content/pickup_sig.html");
 		//createTextEdit();
 		createTextEdit("PU_sig");
-		addTextToCBBtn();	
+		//addTextToCBBtn();	
 		
 	}
 

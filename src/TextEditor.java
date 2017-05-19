@@ -1,6 +1,8 @@
 //Credit: http://www.javaquizplayer.com/examples/text-editor-using-java-example.html
 
 import java.awt.*;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.StringSelection;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
@@ -169,10 +171,13 @@ public class TextEditor extends JPanel {
 		
 		
 		// ############################## MY CUSTOM BUTTONS ##############################
-		JButton readDbBtn = new JButton("Read Database");
+		JButton copyToCBBtn = new JButton("Copy To Clipboard");
+		copyToCBBtn.addActionListener(new copyToCBActionListener());
+		
+		JButton readDbBtn = new JButton("Load Content");
 		readDbBtn.addActionListener(new ReadDbActionListener());
 		
-		JButton updateDbBtn = new JButton("Update Database");
+		JButton updateDbBtn = new JButton("Save Content");
 		updateDbBtn.addActionListener(new UpdateDbActionListener());
 		// FOCUS
 		// ######### Perhaps provide argument to UpdateDBActionListener to specify what category needs to be updated? #########
@@ -187,17 +192,19 @@ public class TextEditor extends JPanel {
 		panel1.add(cutButton);
 		panel1.add(copyButton);
 		panel1.add(pasteButton);
+		panel1.add(copyToCBBtn);
 		panel1.add(new JSeparator(SwingConstants.VERTICAL));
 		panel1.add(boldButton);
 		panel1.add(italicButton);
 		panel1.add(underlineButton);
 		panel1.add(new JSeparator(SwingConstants.VERTICAL));	
 		panel1.add(colorButton);
-		panel1.add(new JSeparator(SwingConstants.VERTICAL));
-		panel1.add(fontSizeComboBox__);
+		//panel1.add(new JSeparator(SwingConstants.VERTICAL));
+		//panel1.add(fontSizeComboBox__);
 		
 		// ====== Second Row ======
 		JPanel panel2 = new JPanel(new FlowLayout(FlowLayout.LEFT));
+		panel2.add(fontSizeComboBox__);
 		panel2.add(fontFamilyComboBox__);	
 		panel2.add(new JSeparator(SwingConstants.VERTICAL));
 		panel2.add(insertPictureButton);
@@ -236,6 +243,9 @@ public class TextEditor extends JPanel {
 	}
 	
 	
+	//Perhaps you can pass a DBConnect object to this constructor...load time could be shortened if you passed
+	//the same DBConnect object to all menu items, each of which creates a TextEditor...Constantly opening and
+	//closing for each menu item is probably contributing to the slow load...
 	public TextEditor(String contentCategory) {
 		this();
 		this.contentCategory = contentCategory;	
@@ -248,17 +258,13 @@ public class TextEditor extends JPanel {
         Document doc = new DefaultStyledDocument(); //Want rtf? Change this to DefaultStyledDocument
 		InputStream is;
 		try {
-			/*
-			rs.next(); //Should I be saying if (rs.next()) { }? But isn't something always gonna be there cuz I put it there?
-
-			is = rs.getBlob("content").getBinaryStream();
-			editor__.getEditorKit().read(is, doc, 0);
-	        is.close();
-	        */
 			if (rs.next()) {
 				is = rs.getBlob("content").getBinaryStream();
 				editor__.getEditorKit().read(is, doc, 0);
 		        is.close();
+			}
+			else {
+				System.out.println("YO! " + contentCategory + " is empty!");
 			}
 
 		} catch (SQLException | IOException | BadLocationException e2) {
@@ -288,19 +294,23 @@ public class TextEditor extends JPanel {
 			
 			//Note how you're not writing anything to a file here, which is good.
 			DBConnect connect = new DBConnect();
-			ResultSet rs = connect.getData();
-						
+			//ResultSet rs = connect.getData();
+			ResultSet rs = connect.getData(contentCategory);
+			
 			//Want rtf? Change this to text/rtf
 			editor__.setContentType("text/rtf");
 			//Want rtf? Change this to DefaultStyledDocument
 	        Document doc = new DefaultStyledDocument();
 			InputStream is;
 			try {
-				rs.next(); //Should I be saying if (rs.next()) { }? But isn't something always gonna be there cuz I put it there?
-
-				is = rs.getBlob("content").getBinaryStream();
-				editor__.getEditorKit().read(is,doc,0);
-		        is.close();
+				if (rs.next()) { //Should I be saying if (rs.next()) { }? But isn't something always gonna be there cuz I put it there?
+					is = rs.getBlob("content").getBinaryStream();
+					editor__.getEditorKit().read(is,doc,0);
+			        is.close();
+				}
+				else {
+					System.out.println("YO! " + contentCategory + " is empty!");
+				}
 
 			} catch (SQLException | IOException | BadLocationException e2) {
 				// TODO Auto-generated catch block
@@ -314,22 +324,28 @@ public class TextEditor extends JPanel {
 	}
 	
 
+	private class copyToCBActionListener implements ActionListener {
+		@Override
+		public void actionPerformed(ActionEvent e) { 
+			try {
+				//NOTE how you're copying ONLY the plaintext -- no stylings!!
+				StringSelection stringSelection = new StringSelection(
+						getEditorDocument().getText(0, getEditorDocument().getLength()));
+				Clipboard clpBrd = Toolkit.getDefaultToolkit().getSystemClipboard();
+				clpBrd.setContents(stringSelection, null);
+			} catch (BadLocationException e2) {
+				e2.printStackTrace();
+			}
+		}
+
+	}
+	
+	
 	//YOU CURRENTLY HARD-CODE THE ID OF THE ROW TO UPDATE!!!
 	private class UpdateDbActionListener implements ActionListener {
 		
 		@Override
 		public void actionPerformed(ActionEvent e) {			
-			
-			//For testing: Get all the text:
-			//System.out.println(editor__.getText());
-			/*
-			try {
-				System.out.println(getEditorDocument().getText(0, getEditorDocument().getLength()));
-			} catch (BadLocationException e2) {
-				// TODO Auto-generated catch block
-				e2.printStackTrace();
-			}
-			*/
 						
 			ByteArrayOutputStream out = new ByteArrayOutputStream();
 			DBConnect connect = new DBConnect();
@@ -1560,6 +1576,8 @@ public class TextEditor extends JPanel {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			
+			System.out.println("THIS DOESN'T WORK YET!!!");
+			
 			File pictureFile = choosePictureFile();
 			
 			if (pictureFile == null) {
@@ -1603,6 +1621,8 @@ public class TextEditor extends JPanel {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 		
+			System.out.println("THIS DOESN'T WORK YET!!!");
+			
 			StyledDocument doc = getEditorDocument();
 			ElementIterator iterator = new ElementIterator(doc);
 			Element element;

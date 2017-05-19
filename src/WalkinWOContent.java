@@ -29,6 +29,7 @@ public class WalkinWOContent extends MenuItemContent {
 		//createTextEdit();
 		createTextEdit("walkin_WO");
 
+		/*
 		addTextToCBBtn();
 		JPanel walkinWOheader = (JPanel)getComponent(0);
 		JButton backToNewRepDia = new JButton("Back to New Repairs Dialogue");
@@ -38,6 +39,7 @@ public class WalkinWOContent extends MenuItemContent {
 			}
 		});
 		walkinWOheader.add(backToNewRepDia, "cell 0 0");
+		*/
 	}
 
 	@Override

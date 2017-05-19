@@ -23,7 +23,7 @@ public class CompanyWOContent extends MenuItemContent {
 		//fillBasicContent("screen_content/company_WO.html");
 		//createTextEdit();
 		createTextEdit("company_WO");
-		addTextToCBBtn();
+		//addTextToCBBtn();
 	}
 	
 	

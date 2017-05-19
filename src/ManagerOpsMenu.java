@@ -39,6 +39,8 @@ public class ManagerOpsMenu extends OpsMenu {
 		addMenuBtns(btnsLst);
 		addBtnALs();
 		
+		//==== Think: Maybe the program will load faster if you didn't open and close a DB connection each time
+		//you created these MenuItemContent objects? ====
 		// =========== The different MenuItemContents that this SalesBarOpsMenu will transition to ===========
 		MenuItemContent openingStoreCLContent = new OpeningStoreCLContent(this, menuScreenCl);
 		MenuItemContent shippingProcContent = new ShippingProcContent(this, menuScreenCl);

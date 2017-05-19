@@ -14,6 +14,6 @@ public class DOSigContent extends MenuItemContent {
 		*/
 		//createTextEdit();
 		createTextEdit("DO_sig");
-		addTextToCBBtn();
+		//addTextToCBBtn();
 	}
 }
