@@ -13,4 +13,13 @@ public class ShippingProcContent extends MenuItemContent {
 		createTextEdit("shipping_proc");
 	}
 	
+	
+	public ShippingProcContent(JPanel backMenuScreen, CardLayout backMenuScreenCl, DBConnect connect) {
+		super(backMenuScreen, backMenuScreenCl);
+		createHeader("Shipping Procedures");
+		//fillBasicContent("screen_content/shipping_procedures.html");
+		//createTextEdit();
+		createTextEdit("shipping_proc", connect);
+	}
+	
 }

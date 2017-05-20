@@ -12,5 +12,13 @@ public class RecMailProcContent extends MenuItemContent {
 		//createTextEdit();
 		createTextEdit("rec_mail_ops");
 	}
+	
+	public RecMailProcContent(JPanel backMenuScreen, CardLayout backMenuScreenCl, DBConnect connect) {
+		super(backMenuScreen, backMenuScreenCl);
+		createHeader("Receiving Mail Operations");
+		//fillBasicContent("screen_content/receiving_mail_operations.html");
+		//createTextEdit();
+		createTextEdit("rec_mail_ops", connect);
+	}
 
 }

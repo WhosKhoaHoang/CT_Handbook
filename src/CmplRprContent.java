@@ -11,4 +11,12 @@ public class CmplRprContent extends MenuItemContent {
 		//createTextEdit();
 		createTextEdit("cmpl_rpr_txt");
 	}
+	
+	public CmplRprContent(JPanel backMenuScreen, CardLayout backMenuScreenCl, DBConnect connect) {
+		super(backMenuScreen, backMenuScreenCl);
+		createHeader("COMPLETE REPAIR TEXT");
+		//fillComponentContent(backMenuScreen, backMenuScreenCl, "screen_content/complete_repair_text.html", "FOLLOW DIALOGUE FOR REPAIR COMPLETION UPDATE", "repair_complete_dialogue_screen");
+		//createTextEdit();
+		createTextEdit("cmpl_rpr_txt", connect);
+	}
 }

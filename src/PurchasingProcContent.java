@@ -11,4 +11,12 @@ public class PurchasingProcContent extends MenuItemContent {
 		//createTextEdit();
 		createTextEdit("purchase_proc");
 	}
+	
+	public PurchasingProcContent(JPanel backMenuScreen, CardLayout backMenuScreenCl, DBConnect connect) {
+		super(backMenuScreen, backMenuScreenCl);
+		createHeader("Purchasing Procedures");
+		//fillBasicContent("screen_content/purchasing_procedures.html");	
+		//createTextEdit();
+		createTextEdit("purchase_proc", connect);
+	}
 }

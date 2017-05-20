@@ -111,6 +111,73 @@ public class SalesBarManual extends OpsMenu {  //Should this inherit from MenuIt
 	}
 
 	
+	//OVERLOAD SO THE CURRENT SYSTEM DOESN'T BREAK!!!
+	/**
+	 * Creates a new SalesBarManual.
+	 */
+	public SalesBarManual(final JPanel backMenuScreen, final CardLayout backMenuScreenCl, DBConnect connect) {	
+		super("CUSTOMER PROCEDURES", backMenuScreen, backMenuScreenCl, "ops_main_screen");		
+		MenuItemContent newRepDiaContent = new NewRepDiaContent(this, menuScreenCl, connect);
+		MenuItemContent walkinWOContent = new WalkinWOContent(this, menuScreenCl, connect);
+		MenuItemContent workCmplContent = new WorkCmplContent(this, menuScreenCl, connect);
+		MenuItemContent pickUpDiaContent = new PickUpDiaContent(this, menuScreenCl, connect);
+		MenuItemContent cmpnyWOContent = new CompanyWOContent(this, menuScreenCl, connect);
+		MenuItemContent cusUpdateContent = new CusUpdateContent(this, menuScreenCl, connect);
+		MenuItemContent apprDiaContent = new ApprDiaContent(this, menuScreenCl, connect);
+		MenuItemContent dOSigContent = new DOSigContent(this, menuScreenCl, connect);
+		MenuItemContent cmplRprContent = new CmplRprContent(this, menuScreenCl, connect);
+		MenuItemContent repComDiaContent = new RepComDiaContent(this, menuScreenCl, connect);
+		MenuItemContent pUSigContent = new PUSigContent(this, menuScreenCl, connect);
+		
+		add(newRepDiaContent, "new_repair_dialogue_screen");
+		add(walkinWOContent, "walkin_work_order_screen");
+		add(workCmplContent, "work_completed_screen");
+		add(pickUpDiaContent, "pickup_dialogue_screen");
+		add(cmpnyWOContent, "company_work_order_screen");
+		add(cusUpdateContent, "customers_update_screen");
+		add(apprDiaContent, "approval_dialogue_screen");
+		add(dOSigContent, "drop_off_signature_screen");
+		add(cmplRprContent, "complete_repair_screen");
+		add(repComDiaContent, "repair_complete_dialogue_screen");
+		add(pUSigContent, "pickup_signature_screen");
+		
+		// === HEADER CONFIGURATIONS ===
+		JPanel header = new JPanel();
+		header.setBackground(Color.decode("0x026937"));
+		header.setLayout(new MigLayout());
+		
+		JLabel headerLbl = new JLabel("Customer Procedures");
+		headerLbl.setFont(new Font("Helvetica", Font.BOLD, 25));
+		headerLbl.setForeground(Color.WHITE);
+		
+		JButton backBtn = new JButton("Back to Main Menu");
+		backBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				backMenuScreenCl.show(backMenuScreen, "ops_main_screen");
+			}
+		});
+		
+		header.add(backBtn, "wrap");
+		header.add(headerLbl, "gaptop 10"); //HARD-CODED VALUE
+		content.add(header, "height 100, pushx, growx, wrap"); //HARD-CODED VALUE. Setting values for Header here.
+		
+		
+		// === BUTTON AREA CONFIGURATIONS ===
+		btnArea.setLayout(new MigLayout());
+		btnArea.setBackground(Color.WHITE);
+		content.add(btnArea, "center, push, growy");		
+		addMainMenuBtns();
+		JScrollPane scrollPane = new JScrollPane(btnArea);
+		content.add(scrollPane, "push, grow");
+		
+		
+		//addMenuBtns(mainMenuBtns); 
+		//addMenuBtns() is a method found in the OpsMenu Base class. That layout looks different from
+		//what you want for "this"...so don't write this statement!
+		addMainMenuBtnALs();
+		
+	}
+	
 	
 	/**
 	 * A helper method that adds buttons to the main menu in groups of three columns.

@@ -15,7 +15,6 @@ public class DBConnect {
 			con = DriverManager.getConnection("jdbc:mysql://localhost/test", "root", ""); //For local
 			//^Things don't seem to work if I use port 3306?
 			//Paste the con for GoDaddy here (see DBConnect.java in Text Editor With Database)
-
 			//System.out.println("YOOOOOO");
 			
 			st = con.createStatement();

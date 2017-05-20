@@ -121,17 +121,24 @@ public class MenuItemContent extends JPanel {
 	}
 	
 	
+	// ==== Passing contentCategory will initialize the TextEditor with content. If for whatever reason you don't want to
+	//      initialize the TextEditor with content, then use the no-arg createTextEdit()... ===
 	protected void createTextEdit(String contentCategory) {
+
+		TextEditor textEditor = new TextEditor(contentCategory);
+		
+		add(textEditor, "grow, push, wrap"); //How to fill both the width and height? with grow, push!!!
+	}
+	
+	
+	//OVERLOAD SO CURRENT SYSTEM DOESN'T BREAK!
+	protected void createTextEdit(String contentCategory, DBConnect connect) {
 		
 		//System.out.println(contentCategory);
 		
 		// FOCUS
-		// ######### Pass an argument to this method that will be passed to TextEditor to let it know what content to show? #########
-		TextEditor textEditor = new TextEditor(contentCategory); //Ultimately might need to say something like TextEditor("category_of_content")
-		
-		//Perhaps I can populate text content write here?
-		//textEditor.update
-		
+		TextEditor textEditor = new TextEditor(contentCategory, connect); //Ultimately might need to say something like TextEditor("category_of_content")
+
 		add(textEditor, "grow, push, wrap"); //How to fill both the width and height? with grow, push!!!
 	}
 	

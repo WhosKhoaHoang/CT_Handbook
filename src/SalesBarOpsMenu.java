@@ -35,20 +35,45 @@ public class SalesBarOpsMenu extends OpsMenu {
 		addBtnALs();
 		
 
-		// =========== The different MenuItemContents that this SalesBarOpsMenu will transition to ===========
+		// =========== The different MenuItemContents that this SalesBarOpsMenu will transition to ===========		
 		MenuItemContent openingStoreCLContent = new OpeningStoreCLContent(this, menuScreenCl);
 		MenuItemContent phoneCallProcContent = new PhoneCallProcContent(this, menuScreenCl);
 		SalesBarManual SBManual = new SalesBarManual(this, menuScreenCl); 
-		//^Perhaps I need to pass homeScreenCl to this so I can go back to the sales bar screen? No. I think a card can transition
-		//to another component only if that card was added by the component that had CardLayout set on it! homeScreen never added
-		//the SBManual as a card, so the transition can't take place. However, this added SBManual as a card!!!
-		// - You passed "this" so that SalesBarManual could have a handle back to the menu screen.
-		// - You passed menuScreenCL so that SalesBarManual could have the layout generator to "turn back the page" to the menu screen.
-		//JPanel cusProc = new JPanel();
 		MenuItemContent purchasingProcContent = new PurchasingProcContent(this, menuScreenCl);
 		MenuItemContent menuItemContent = new RecMailProcContent(this, menuScreenCl);
 		MenuItemContent dOUpdatesContent = new DOUpdatesContent(this, menuScreenCl);		
 		MenuItemContent yelpResponseTmplContent = new YelpResponseTmplContent(this, menuScreenCl);
+		
+		// =========== Add the JPanels as cards ===========
+		add(openingStoreCLContent, "opening_store_checklist");
+		add(phoneCallProcContent, "phone_call");
+		add(SBManual, "customer_procedures");
+		add(purchasingProcContent, "purchasing_procedures");
+		add(menuItemContent, "receiving_mail_ops");
+		add(dOUpdatesContent, "dropoff_updates");
+		add(yelpResponseTmplContent, "yelp_response_template");
+	}
+	
+
+	//OVERLOAD SO CURRENT SYSTEM DOESN'T BREAK!
+	public SalesBarOpsMenu(JPanel homeScreen, CardLayout homeScreenCl, DBConnect connect) {
+		super("SALES BAR OPERATIONS", homeScreen, homeScreenCl, "home_menu");
+		
+		createMenuHeader("SALES BAR OPERATIONS"); //Should this be specific to each OpsMenu instead?
+		createBtnArea(); //Should this be specific to each OpsMenu instead?
+		
+		addMenuBtns(btnsLst);
+		addBtnALs();
+		
+
+		// =========== The different MenuItemContents that this SalesBarOpsMenu will transition to ===========
+		MenuItemContent openingStoreCLContent = new OpeningStoreCLContent(this, menuScreenCl, connect);
+		MenuItemContent phoneCallProcContent = new PhoneCallProcContent(this, menuScreenCl, connect);
+		SalesBarManual SBManual = new SalesBarManual(this, menuScreenCl, connect);
+		MenuItemContent purchasingProcContent = new PurchasingProcContent(this, menuScreenCl, connect);
+		MenuItemContent menuItemContent = new RecMailProcContent(this, menuScreenCl, connect);
+		MenuItemContent dOUpdatesContent = new DOUpdatesContent(this, menuScreenCl, connect);		
+		MenuItemContent yelpResponseTmplContent = new YelpResponseTmplContent(this, menuScreenCl, connect);
 		
 		// =========== Add the JPanels as cards ===========
 		add(openingStoreCLContent, "opening_store_checklist");

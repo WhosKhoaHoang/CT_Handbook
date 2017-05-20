@@ -56,11 +56,24 @@ public class CTHandbook {
 		
 		homeScreen.setLayout(homeScreenCl);
 		homeScreen.add(homeMenu, "home_menu");
+		// ====== Perhaps pass a DBConnect object that each MenuItem uses to pull content from the database here to INITIALIZE
+		//	      MENU ITEM CONTENTS? ======
+		// - Ultimately, you could try loading the database version first? If the database connection fails...
+		//    HMMMM, think: How to handle no database connection when you first start the program? How about during program execution?
+		//    Perhaps you can have an argument that serves as a flag telling each specific MenuItem constructor (e.g., ClosingStoreCL) 
+		//	  to call createTextEdit without a contentCategory string so that nothing gets initialized to the TextEditor...
+		/*
 		homeScreen.add(new ManagerOpsMenu(homeScreen, homeScreenCl), "manager_menu");
 		homeScreen.add(new SalesBarOpsMenu(homeScreen, homeScreenCl), "sales_bar_menu");
 		homeScreen.add(new TechnicianOpsMenu(homeScreen, homeScreenCl), "technician_menu");
+		*/
+		DBConnect connect = new DBConnect();
+		homeScreen.add(new ManagerOpsMenu(homeScreen, homeScreenCl, connect), "manager_menu");
+		homeScreen.add(new SalesBarOpsMenu(homeScreen, homeScreenCl, connect), "sales_bar_menu");
+		homeScreen.add(new TechnicianOpsMenu(homeScreen, homeScreenCl, connect), "technician_menu");
 		homeScreenCl.show(homeScreen, "main_menu");
-
+		connect.close();
+		
 		// === CLEVERTECH LOGO CONFIGURATIONS ===
 		logo.setBackground(Color.WHITE);
 		

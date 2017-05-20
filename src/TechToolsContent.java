@@ -14,5 +14,14 @@ public class TechToolsContent extends MenuItemContent {
 
 		createTextEdit("tech_tools");
 	}
+	
+	public TechToolsContent(JPanel backMenuScreen, CardLayout backMenuScreenCl, DBConnect connect) {
+		super(backMenuScreen, backMenuScreenCl);
+		createHeader("Tech Tools");
+		//fillBasicContent("screen_content/tech_tools.html");	
+		//createTextEdit();
+
+		createTextEdit("tech_tools", connect);
+	}
 
 }

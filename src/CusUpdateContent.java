@@ -10,4 +10,11 @@ public class CusUpdateContent extends MenuItemContent {
 		//fillBasicContent("screen_content/customers_update_text.html");	
 		createTextEdit("cus_update");
 	}
+	
+	public CusUpdateContent(JPanel backMenuScreen, CardLayout backMenuScreenCl, DBConnect connect) {
+		super(backMenuScreen, backMenuScreenCl);
+		createHeader("CUSTOMERS UPDATE TEXT");
+		//fillBasicContent("screen_content/customers_update_text.html");	
+		createTextEdit("cus_update", connect);
+	}
 }

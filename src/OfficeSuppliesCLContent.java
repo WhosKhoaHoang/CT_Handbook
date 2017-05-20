@@ -24,6 +24,15 @@ public class OfficeSuppliesCLContent extends MenuItemContent{
 		createTextEdit("office_supp_CL");
 	}
 	
+	public OfficeSuppliesCLContent(JPanel backMenuScreen, CardLayout backMenuScreenCl, DBConnect connect) {
+		super(backMenuScreen, backMenuScreenCl);
+		createHeader("Office Supplies Checklist");
+		//fillBasicContent("screen_content/office_supplies_checklist.html");
+		//createTextEdit();
+		createTextEdit("office_supp_CL", connect);
+	}
+	
+	
 	@Override
 	//Got code from http://stackoverflow.com/questions/11753042/jeditorpane-hyperlink-swing-html for hyperlink listener stuff
 	protected void fillBasicContent(String fileName) {

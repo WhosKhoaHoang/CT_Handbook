@@ -13,4 +13,12 @@ public class RepComDiaContent extends MenuItemContent {
 		//createTextEdit();	
 		createTextEdit("rpr_cmpl_dialogue");
 	}
+	
+	public RepComDiaContent(JPanel backMenuScreen, CardLayout backMenuScreenCl, DBConnect connect) {
+		super(backMenuScreen, backMenuScreenCl);
+		createHeader("DIALOGUE REPAIR COMPLETE");
+		//fillComponentContent(backMenuScreen, backMenuScreenCl, "screen_content/repair_completion_dialogue.html", "FOLLOW COMPLETE REPAIR", "complete_repair_screen");	
+		//createTextEdit();	
+		createTextEdit("rpr_cmpl_dialogue", connect);
+	}
 }

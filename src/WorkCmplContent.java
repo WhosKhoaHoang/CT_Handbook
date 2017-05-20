@@ -11,5 +11,13 @@ public class WorkCmplContent extends MenuItemContent {
 		//createTextEdit();
 		createTextEdit("work_cmpl");
 	}
+	
+	public WorkCmplContent(JPanel backMenuScreen, CardLayout backMenuScreenCl, DBConnect connect) {
+		super(backMenuScreen, backMenuScreenCl);
+		createHeader("WORK COMPLETED TEXT");
+		//fillComponentContent(backMenuScreen, backMenuScreenCl,"screen_content/work_completed_text.html", "FOLLOW DIALOGUE FOR APPROVAL", "approval_dialogue_screen");	
+		//createTextEdit();
+		createTextEdit("work_cmpl", connect);
+	}
 
 }

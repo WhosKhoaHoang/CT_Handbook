@@ -11,5 +11,13 @@ public class DonorBoardContent extends MenuItemContent {
 		//createTextEdit();
 		createTextEdit("donor_board");
 	}
+	
+	public DonorBoardContent(JPanel backMenuScreen, CardLayout backMenuScreenCl, DBConnect connect) {
+		super(backMenuScreen, backMenuScreenCl);
+		createHeader("Donor Board Procedures");
+		//fillBasicContent("screen_content/donor_board_procedures.html");
+		//createTextEdit();
+		createTextEdit("donor_board", connect);
+	}
 
 }

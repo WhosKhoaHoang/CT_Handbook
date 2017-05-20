@@ -13,7 +13,15 @@ public class PUSigContent extends MenuItemContent {
 		//createTextEdit();
 		createTextEdit("PU_sig");
 		//addTextToCBBtn();	
-		
+	}
+	
+	public PUSigContent(JPanel backMenuScreen, CardLayout backMenuScreenCl, DBConnect connect) {
+		super(backMenuScreen, backMenuScreenCl);
+		createHeader("PICK-UP SIGNATURE");
+		//fillBasicContent("screen_content/pickup_sig.html");
+		//createTextEdit();
+		createTextEdit("PU_sig", connect);
+		//addTextToCBBtn();	
 	}
 
 }

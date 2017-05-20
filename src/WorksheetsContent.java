@@ -23,7 +23,15 @@ public class WorksheetsContent extends MenuItemContent {
 		//fillBasicContent("screen_content/worksheets.html");
 		createTextEdit();
 	}
+	
+	public WorksheetsContent(JPanel backMenuScreen, CardLayout backMenuScreenCl, DBConnect connect) {
+		super(backMenuScreen, backMenuScreenCl);
+		createHeader("Worksheets");
+		//fillBasicContent("screen_content/worksheets.html");
+		createTextEdit();
+	}
 
+	
 	@Override
 	//Got code from http://stackoverflow.com/questions/11753042/jeditorpane-hyperlink-swing-html for hyperlink listener stuff
 	protected void fillBasicContent(String fileName) {

@@ -41,6 +41,16 @@ public class WalkinWOContent extends MenuItemContent {
 		walkinWOheader.add(backToNewRepDia, "cell 0 0");
 		*/
 	}
+	
+	
+	public WalkinWOContent(final JPanel backMenuScreen, final CardLayout backMenuScreenCl, DBConnect connect) {
+		super(backMenuScreen, backMenuScreenCl);
+		
+		createHeader("WALK-IN WORK ORDER TEMPLATE");	
+		//fillBasicContent("screen_content/walkinWO.html");
+		//createTextEdit();
+		createTextEdit("walkin_WO", connect);
+	}
 
 	@Override
 	/**

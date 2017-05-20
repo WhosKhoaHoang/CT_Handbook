@@ -279,6 +279,40 @@ public class TextEditor extends JPanel {
 	}
 	
 	
+	//OVERLOAD SO CURRENT SYSTEM DOESN'T BREAK!
+	public TextEditor(String contentCategory, DBConnect connect) {
+		this();
+		this.contentCategory = contentCategory;	
+		
+		//Note how you're not writing anything to a file here, which is good.
+		//DBConnect connect = new DBConnect();
+		ResultSet rs = connect.getData(contentCategory);
+					
+		editor__.setContentType("text/rtf"); //Want rtf? Change this to text/rtf
+        Document doc = new DefaultStyledDocument(); //Want rtf? Change this to DefaultStyledDocument
+		InputStream is;
+		try {
+			if (rs.next()) {
+				is = rs.getBlob("content").getBinaryStream();
+				editor__.getEditorKit().read(is, doc, 0);
+		        is.close();
+			}
+			else {
+				System.out.println("YO! " + contentCategory + " is empty!");
+			}
+
+		} catch (SQLException | IOException | BadLocationException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
+        editor__.setDocument(doc);
+
+        //System.out.println(editor__.getEditorKit()); //FOR TESTING
+		//connect.close();
+		
+	}
+	
+	
 	private StyledDocument getNewDocument() {
 		
 		StyledDocument doc = new DefaultStyledDocument();

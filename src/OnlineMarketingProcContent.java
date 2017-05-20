@@ -11,5 +11,13 @@ public class OnlineMarketingProcContent extends MenuItemContent {
 		//createTextEdit();
 		createTextEdit("online_marketing_proc");
 	}
+	
+	public OnlineMarketingProcContent(JPanel backMenuScreen, CardLayout backMenuScreenCl, DBConnect connect) {
+		super(backMenuScreen, backMenuScreenCl);
+		createHeader("Online Marketing Procedures");
+		//fillBasicContent("screen_content/online_marketing.html");
+		//createTextEdit();
+		createTextEdit("online_marketing_proc", connect);
+	}
 
 }

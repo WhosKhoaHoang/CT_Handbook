@@ -8,13 +8,13 @@ public class OpeningStoreCLContent extends MenuItemContent {
 		super(backMenuScreen, backMenuScreenCl);
 		createHeader("Opening Store Checklist");
 		//fillBasicContent("screen_content/opening_store_checklist.html");
-		
-		// FOCUS
-		// ######### Connect to database and pull contents to put into the content window? #########
-		//   - Would need to pass argument to createTextEdit (a method in MenuItemContent), something like
-		//      createTextEdit("opening_store_CL")
-		//createTextEdit();
-
 		createTextEdit("opening_store_CL");
+	}
+	
+	public OpeningStoreCLContent(final JPanel backMenuScreen, final CardLayout backMenuScreenCl, DBConnect connect) {
+		super(backMenuScreen, backMenuScreenCl);
+		createHeader("Opening Store Checklist");
+		//fillBasicContent("screen_content/opening_store_checklist.html");
+		createTextEdit("opening_store_CL", connect);
 	}
 }

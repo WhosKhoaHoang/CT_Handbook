@@ -27,6 +27,16 @@ public class CompanyWOContent extends MenuItemContent {
 	}
 	
 	
+	public CompanyWOContent(JPanel backMenuScreen, CardLayout backMenuScreenCl, DBConnect connect) {
+		super(backMenuScreen, backMenuScreenCl);
+		createHeader("COMPANY WORK ORDER TEMPLATE");
+		//fillBasicContent("screen_content/company_WO.html");
+		//createTextEdit();
+		createTextEdit("company_WO", connect);
+		//addTextToCBBtn();
+	}
+	
+	
 	@Override
 	/**
 	 * A helper method that fills in the content for a content screen.

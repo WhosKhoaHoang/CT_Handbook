@@ -12,5 +12,13 @@ public class YelpResponseTmplContent extends MenuItemContent {
 		//createTextEdit();
 		createTextEdit("yelp_resp");
 	}
+	
+	public YelpResponseTmplContent(JPanel backMenuScreen, CardLayout backMenuScreenCl, DBConnect connect) {
+		super(backMenuScreen, backMenuScreenCl);
+		createHeader("Yelp Response Template");
+		//fillBasicContent("screen_content/yelp_response_template.html");	
+		//createTextEdit();
+		createTextEdit("yelp_resp", connect);
+	}
 
 }

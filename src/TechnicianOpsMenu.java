@@ -53,6 +53,36 @@ public class TechnicianOpsMenu extends OpsMenu {
 	}
 	
 	
+	//OVERLOAD SO CURRENT SYSTEM DOESN'T BREAK!!!
+	public TechnicianOpsMenu(JPanel mainScreen, CardLayout mainScreenCl, DBConnect connect) {
+		super("TECHNICIAN OPERATIONS", mainScreen, mainScreenCl, "home_menu");
+		
+		createMenuHeader("TECHNICIAN OPERATIONS"); //Should this be specific to each OpsMenu instead?
+		createBtnArea(); //Should this be specific to each OpsMenu instead?
+		
+		addMenuBtns(btnsLst);
+		addBtnALs();
+		
+		// =========== The different MenuItemContents that this SalesBarOpsMenu will transition to ===========
+		MenuItemContent techRepairProcContent = new TechRepairProcContent(this, menuScreenCl, connect);
+		SalesBarManual salesBarManual = new SalesBarManual(this, menuScreenCl, connect);
+		MenuItemContent donorBoardContent = new DonorBoardContent(this, menuScreenCl, connect);
+		MenuItemContent closingStoreCL = new ClosingStoreCL(this, menuScreenCl, connect);
+		MenuItemContent inventoryCheckProcContent = new InventoryCheckProcContent(this, menuScreenCl, connect);
+		MenuItemContent techToolsContent = new TechToolsContent(this, menuScreenCl, connect);
+		MenuItemContent technicianKBContent = new TechnicianKBContent(this, menuScreenCl, connect);
+		
+		// =========== Add the JPanels as cards ===========
+		add(techRepairProcContent, "technician_repair_procedures");
+		add(salesBarManual, "customer_procedures");
+		add(donorBoardContent, "donor_board_procedures");
+		add(closingStoreCL, "closing_store_checklist");
+		add(inventoryCheckProcContent, "inventory_check_procedures");
+		add(techToolsContent, "tech_tools");
+		add(technicianKBContent, "technician_knowledge_base");
+	}
+	
+	
 	/**
 	 * A helper method that adds ActionListerns to each button
 	 */

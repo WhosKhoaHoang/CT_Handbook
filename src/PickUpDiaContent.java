@@ -11,4 +11,12 @@ public class PickUpDiaContent extends MenuItemContent {
 		//createTextEdit();
 		createTextEdit("pickup_dialogue");
 	}
+	
+	public PickUpDiaContent(JPanel backMenuScreen, CardLayout backMenuScreenCl, DBConnect connect) {
+		super(backMenuScreen, backMenuScreenCl);
+		createHeader("DIALOGUE FOR PICK-UP");	
+		//fillComponentContent(backMenuScreen, backMenuScreenCl, "screen_content/pickup_dialogue.html", "FOLLOW PICK-UP SIGNATURE", "pickup_signature_screen");
+		//createTextEdit();
+		createTextEdit("pickup_dialogue", connect);
+	}
 }
