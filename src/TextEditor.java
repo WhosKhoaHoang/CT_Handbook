@@ -89,6 +89,7 @@ public class TextEditor extends JPanel {
 		editor__ = new JTextPane();
 		JScrollPane editorScrollPane = new JScrollPane(editor__);
 
+		editor__.setContentType("text/html");
 		editor__.setDocument(getNewDocument());
 				
 		//System.out.println(editor__.getEditorKit()); //FOR TESTING
