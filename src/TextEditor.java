@@ -37,6 +37,7 @@ import javax.swing.text.StyledEditorKit.FontFamilyAction;
 import javax.swing.text.StyledEditorKit.FontSizeAction;
 import javax.swing.text.StyledEditorKit.ItalicAction;
 import javax.swing.text.StyledEditorKit.UnderlineAction;
+import javax.swing.text.html.HTMLDocument;
 import javax.swing.plaf.nimbus.NimbusLookAndFeel;
 
 import net.miginfocom.swing.MigLayout;
@@ -89,6 +90,8 @@ public class TextEditor extends JPanel {
 		JScrollPane editorScrollPane = new JScrollPane(editor__);
 
 		editor__.setDocument(getNewDocument());
+				
+		//System.out.println(editor__.getEditorKit()); //FOR TESTING
 		
 		// ######### Have argument for constructor that allows document to be set with content here? #########
 		
@@ -254,13 +257,11 @@ public class TextEditor extends JPanel {
 		DBConnect connect = new DBConnect();
 		ResultSet rs = connect.getData(contentCategory);
 					
-		editor__.setContentType("text/rtf"); //Want rtf? Change this to text/rtf
-        Document doc = new DefaultStyledDocument(); //Want rtf? Change this to DefaultStyledDocument
 		InputStream is;
 		try {
 			if (rs.next()) {
 				is = rs.getBlob("content").getBinaryStream();
-				editor__.getEditorKit().read(is, doc, 0);
+				editor__.getEditorKit().read(is, editor__.getDocument(), 0);
 		        is.close();
 			}
 			else {
@@ -271,7 +272,6 @@ public class TextEditor extends JPanel {
 			// TODO Auto-generated catch block
 			e2.printStackTrace();
 		}
-        editor__.setDocument(doc);
 
         //System.out.println(editor__.getEditorKit()); //FOR TESTING
 		connect.close();
@@ -288,13 +288,11 @@ public class TextEditor extends JPanel {
 		//DBConnect connect = new DBConnect();
 		ResultSet rs = connect.getData(contentCategory);
 					
-		editor__.setContentType("text/rtf"); //Want rtf? Change this to text/rtf
-        Document doc = new DefaultStyledDocument(); //Want rtf? Change this to DefaultStyledDocument
 		InputStream is;
 		try {
 			if (rs.next()) {
 				is = rs.getBlob("content").getBinaryStream();
-				editor__.getEditorKit().read(is, doc, 0);
+				editor__.getEditorKit().read(is, editor__.getDocument(), 0);
 		        is.close();
 			}
 			else {
@@ -305,7 +303,6 @@ public class TextEditor extends JPanel {
 			// TODO Auto-generated catch block
 			e2.printStackTrace();
 		}
-        editor__.setDocument(doc);
 
         //System.out.println(editor__.getEditorKit()); //FOR TESTING
 		//connect.close();
@@ -315,8 +312,8 @@ public class TextEditor extends JPanel {
 	
 	private StyledDocument getNewDocument() {
 		
-		StyledDocument doc = new DefaultStyledDocument();
-		//doc.addUndoableEditListener(new UndoEditListener());
+		StyledDocument doc = new HTMLDocument();
+		
 		return doc;
 	}
 	
@@ -331,10 +328,7 @@ public class TextEditor extends JPanel {
 			//ResultSet rs = connect.getData();
 			ResultSet rs = connect.getData(contentCategory);
 			
-			//Want rtf? Change this to text/rtf
-			editor__.setContentType("text/rtf");
-			//Want rtf? Change this to DefaultStyledDocument
-	        Document doc = new DefaultStyledDocument();
+	        Document doc = new HTMLDocument();
 			InputStream is;
 			try {
 				if (rs.next()) { //Should I be saying if (rs.next()) { }? But isn't something always gonna be there cuz I put it there?
@@ -384,7 +378,7 @@ public class TextEditor extends JPanel {
 			ByteArrayOutputStream out = new ByteArrayOutputStream();
 			DBConnect connect = new DBConnect();
 	        try {
-				Document doc = editor__.getDocument(); //No longer DefaultStyleDocument at this point?
+				Document doc = editor__.getDocument();
 				editor__.getEditorKit().write(out,doc,0,doc.getLength());
 				out.flush(); out.close();
 				
@@ -428,8 +422,8 @@ public class TextEditor extends JPanel {
 	
 	private StyledDocument getEditorDocument() { //Document itself is a distinct entity from the editor?
 		
-		editor__.setContentType("text/rtf"); //Set content type of editor to RTF here...
-		StyledDocument doc = (DefaultStyledDocument) editor__.getDocument();
+		//editor__.setContentType("text/rtf"); //Set content type of editor to RTF here...
+		StyledDocument doc = (HTMLDocument) editor__.getDocument();
 		return doc;
 	}
 	
@@ -500,7 +494,7 @@ public class TextEditor extends JPanel {
 	
 	private AttributeSet getParaStartAttributes(int pos) {
 	
-		StyledDocument doc = (DefaultStyledDocument) editor__.getDocument();
+		StyledDocument doc = (HTMLDocument) editor__.getDocument();
 		Element	charEle = doc.getCharacterElement(pos);
 		return charEle.getAttributes();
 	}
@@ -1083,7 +1077,7 @@ public class TextEditor extends JPanel {
 									Integer newNum) {
 				
 			try {
-				((DefaultStyledDocument) getEditorDocument()).replace(
+				((HTMLDocument) getEditorDocument()).replace(
 													nextParaEleStart,
 													getNumberString(prevNum).length(), 
 													getNumberString(newNum), 
