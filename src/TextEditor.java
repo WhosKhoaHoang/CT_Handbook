@@ -89,13 +89,10 @@ public class TextEditor extends JPanel {
 		editor__ = new JTextPane();
 		JScrollPane editorScrollPane = new JScrollPane(editor__);
 
+		//Wanna change things to RTF? Then say setContentType("text/rtf") and replace new HTMLDocument() with new DefaultStyledDocument()
 		editor__.setContentType("text/html");
-		editor__.setDocument(getNewDocument());
-				
-		//System.out.println(editor__.getEditorKit()); //FOR TESTING
-		
-		// ######### Have argument for constructor that allows document to be set with content here? #########
-		
+		editor__.setDocument(new HTMLDocument());
+								
 		editor__.addKeyListener(new BulletParaKeyListener());
 		editor__.addKeyListener(new NumbersParaKeyListener());
 		editor__.addCaretListener(new EditorCaretListener());
@@ -236,13 +233,10 @@ public class TextEditor extends JPanel {
 		//===== Mine =====
 		toolBarPanel.add(panel3);
 
-		
 		add(toolBarPanel, BorderLayout.NORTH);
 		add(editorScrollPane, BorderLayout.CENTER);
-
 				
 		editor__.requestFocusInWindow(); //Do I need this?
-
 
 	}
 	
@@ -274,9 +268,7 @@ public class TextEditor extends JPanel {
 			e2.printStackTrace();
 		}
 
-        //System.out.println(editor__.getEditorKit()); //FOR TESTING
-		connect.close();
-		
+		connect.close();		
 	}
 	
 	
@@ -286,7 +278,6 @@ public class TextEditor extends JPanel {
 		this.contentCategory = contentCategory;	
 		
 		//Note how you're not writing anything to a file here, which is good.
-		//DBConnect connect = new DBConnect();
 		ResultSet rs = connect.getData(contentCategory);
 					
 		InputStream is;
@@ -304,20 +295,9 @@ public class TextEditor extends JPanel {
 			// TODO Auto-generated catch block
 			e2.printStackTrace();
 		}
+		
+	}
 
-        //System.out.println(editor__.getEditorKit()); //FOR TESTING
-		//connect.close();
-		
-	}
-	
-	
-	private StyledDocument getNewDocument() {
-		
-		StyledDocument doc = new HTMLDocument();
-		
-		return doc;
-	}
-	
 	
 	private class ReadDbActionListener implements ActionListener {
 		
@@ -335,6 +315,7 @@ public class TextEditor extends JPanel {
 				if (rs.next()) { //Should I be saying if (rs.next()) { }? But isn't something always gonna be there cuz I put it there?
 					is = rs.getBlob("content").getBinaryStream();
 					editor__.getEditorKit().read(is,doc,0);
+
 			        is.close();
 				}
 				else {
@@ -347,7 +328,6 @@ public class TextEditor extends JPanel {
 			}
 	        editor__.setDocument(doc);
 
-	        //System.out.println(editor__.getEditorKit()); //FOR TESTING
 			connect.close();
 		}
 	}
@@ -421,9 +401,9 @@ public class TextEditor extends JPanel {
 	}
 	
 	
-	private StyledDocument getEditorDocument() { //Document itself is a distinct entity from the editor?
+	//ActionListeners will call this method so that they could, DUH, edit the current document associated with editor__
+	private StyledDocument getEditorDocument() {
 		
-		//editor__.setContentType("text/rtf"); //Set content type of editor to RTF here...
 		StyledDocument doc = (HTMLDocument) editor__.getDocument();
 		return doc;
 	}
@@ -576,8 +556,7 @@ public class TextEditor extends JPanel {
 		}
 		
 		// Check if this is start of document
-		Element paraEle =
-				getEditorDocument().getParagraphElement(editor__.getCaretPosition());
+		Element paraEle = getEditorDocument().getParagraphElement(editor__.getCaretPosition());
 		final int newPos = (paraEle.getStartOffset() == 0) ? 0 : pos;
 		
 		// Position the caret in an EDT, otherwise the caret is
@@ -686,8 +665,7 @@ public class TextEditor extends JPanel {
 				bulletedPara_ = true;
 				Element paraEle = getEditorDocument().getParagraphElement(pos);
 				prevParaEleStart_ = paraEle.getStartOffset();
-				prevParaText_ =
-						getPrevParaText(prevParaEleStart_, paraEle.getEndOffset());
+				prevParaText_ = getPrevParaText(prevParaEleStart_, paraEle.getEndOffset());
 			}
 		}
 		
