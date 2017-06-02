@@ -1,6 +1,4 @@
 import java.io.InputStream;
-import java.io.ObjectOutputStream;
-import java.io.OutputStream;
 import java.sql.*;
 
 public class DBConnect {
@@ -15,6 +13,7 @@ public class DBConnect {
 			con = DriverManager.getConnection("jdbc:mysql://localhost/test", "root", ""); //For local
 			//^Things don't seem to work if I use port 3306?
 			//Paste the con for GoDaddy here (see DBConnect.java in Text Editor With Database)
+			//con = DriverManager.getConnection("jdbc:mysql://107.180.58.30:3306/CT_Handbook", "wutdaheck", "scwutdaheck2000"); //For GoDaddy
 			//System.out.println("YOOOOOO");
 			
 			st = con.createStatement();
@@ -25,13 +24,14 @@ public class DBConnect {
 	}
 	
 	
+	//TEST VERSION
 	public ResultSet getData() {
 		
 		ResultSet rs = null;
 		
 		try {
 			
-			String query = "SELECT * FROM panel_content WHERE id=42";
+			String query = "SELECT * FROM panel_content_html WHERE id=42";
 			//^HARD-CODED ID (42 for local, 5 for GoDaddy)
 			//String query = "SELECT * FROM panel_content";
 
@@ -43,14 +43,14 @@ public class DBConnect {
 		
 		return rs;
 	}
-
+	
 	
 	//FOR GETTING PARTICULAR RECORDS
 	public ResultSet getData(String contentCategory) {
 		
 		ResultSet rs = null;
 		try {
-			String query = "SELECT * FROM panel_content WHERE category='"+contentCategory+"'";
+			String query = "SELECT * FROM panel_content_html WHERE category='"+contentCategory+"'";
 			rs = st.executeQuery(query);
 			
 			//PreparedStatement pstmt = con.prepareStatement("SELECT * FROM panel_content WHERE category=?");
@@ -66,9 +66,10 @@ public class DBConnect {
 	}
 	
 	
+	//TEST VERSION
 	public void updateData(InputStream is) {
 		try {
-			PreparedStatement pstmt = con.prepareStatement("UPDATE panel_content SET content=? WHERE id=42"); 
+			PreparedStatement pstmt = con.prepareStatement("UPDATE panel_content_html SET content=? WHERE id=42"); 
 			//^HARD-CODED ID (42 for local, 5 for GoDaddy)
 			
 		    pstmt.setBlob(1, is);
@@ -79,10 +80,11 @@ public class DBConnect {
 		}
 	}
 	
+	
 	//FOR UPDATING SPECIFIC RECORDS
 	public void updateData(InputStream is, String contentCategory) {
 		try {
-			PreparedStatement pstmt = con.prepareStatement("UPDATE panel_content SET content=? WHERE category=?"); 
+			PreparedStatement pstmt = con.prepareStatement("UPDATE panel_content_html SET content=? WHERE category=?"); 
 			//^HARD-CODED ID (42 for local, 5 for GoDaddy)
 			
 		    pstmt.setBlob(1, is);
@@ -99,7 +101,7 @@ public class DBConnect {
 	public void insertData(InputStream is) {
 		try {
 			
-			PreparedStatement pstmt = con.prepareStatement("INSERT INTO panel_content (category, content) VALUES (?, ?)");
+			PreparedStatement pstmt = con.prepareStatement("INSERT INTO panel_content_html (category, content) VALUES (?, ?)");
 			//^Just leave id out of the attributes tuple. Since it's set auto-increment in the database, it'll be taken care of automatically.
 						
 		    pstmt.setString(1, "Testing123");

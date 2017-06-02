@@ -89,7 +89,7 @@ public class TextEditor extends JPanel {
 		editor__ = new JTextPane();
 		JScrollPane editorScrollPane = new JScrollPane(editor__);
 
-		//Wanna change things to RTF? Then say setContentType("text/rtf") and replace new HTMLDocument() with new DefaultStyledDocument()
+		//Wanna change things to RTF? Then say setContentType("text/rtf") and replace HTMLDocument() with DefaultStyledDocument()
 		editor__.setContentType("text/html");
 		editor__.setDocument(new HTMLDocument());
 								
@@ -206,11 +206,13 @@ public class TextEditor extends JPanel {
 		// ====== Second Row ======
 		JPanel panel2 = new JPanel(new FlowLayout(FlowLayout.LEFT));
 		panel2.add(fontSizeComboBox__);
-		panel2.add(fontFamilyComboBox__);	
+		panel2.add(fontFamilyComboBox__);
+		/*
 		panel2.add(new JSeparator(SwingConstants.VERTICAL));
 		panel2.add(insertPictureButton);
 		panel2.add(deletePictureButton);
 		panel2.add(new JSeparator(SwingConstants.VERTICAL));
+		*/
 		panel2.add(bulletInsertButton);
 		panel2.add(bulletRemoveButton);
 		panel2.add(new JSeparator(SwingConstants.VERTICAL));
@@ -306,7 +308,6 @@ public class TextEditor extends JPanel {
 			
 			//Note how you're not writing anything to a file here, which is good.
 			DBConnect connect = new DBConnect();
-			//ResultSet rs = connect.getData();
 			ResultSet rs = connect.getData(contentCategory);
 			
 	        Document doc = new HTMLDocument();
@@ -314,7 +315,7 @@ public class TextEditor extends JPanel {
 			try {
 				if (rs.next()) { //Should I be saying if (rs.next()) { }? But isn't something always gonna be there cuz I put it there?
 					is = rs.getBlob("content").getBinaryStream();
-					editor__.getEditorKit().read(is,doc,0);
+					editor__.getEditorKit().read(is, doc, 0);
 
 			        is.close();
 				}
@@ -323,11 +324,12 @@ public class TextEditor extends JPanel {
 				}
 
 			} catch (SQLException | IOException | BadLocationException e2) {
-				// TODO Auto-generated catch block
 				e2.printStackTrace();
 			}
 	        editor__.setDocument(doc);
 
+	        //System.out.println(editor__.getEditorKit()); //FOR TESTING
+	        
 			connect.close();
 		}
 	}
@@ -350,12 +352,13 @@ public class TextEditor extends JPanel {
 	}
 	
 	
-	//YOU CURRENTLY HARD-CODE THE ID OF THE ROW TO UPDATE!!!
 	private class UpdateDbActionListener implements ActionListener {
 		
 		@Override
 		public void actionPerformed(ActionEvent e) {			
 						
+			//System.out.println(editor__.getEditorKit());
+			
 			ByteArrayOutputStream out = new ByteArrayOutputStream();
 			DBConnect connect = new DBConnect();
 	        try {
@@ -363,7 +366,6 @@ public class TextEditor extends JPanel {
 				editor__.getEditorKit().write(out,doc,0,doc.getLength());
 				out.flush(); out.close();
 				
-				//connect.updateData(new ByteArrayInputStream(out.toByteArray()));
 				connect.updateData(new ByteArrayInputStream(out.toByteArray()), contentCategory); //UPDATE CONTENT CATEGORY!!!
 
 			} catch (IOException e1) {

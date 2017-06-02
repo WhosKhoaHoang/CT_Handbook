@@ -22,6 +22,9 @@ import net.miginfocom.swing.MigLayout;
 //TODO: Fix issue of not being able to put two buttons in a single JTextPane
 //TODO: Allow a user to add new menu items + content for those menu items
 
+//THINK: A search feature will just look through the TextEditor text of all MenuItemContents?
+
+
 public class CTHandbook {
 	final int PREF_WIDTH = 800;
 	final int PREF_HEIGHT = 600;

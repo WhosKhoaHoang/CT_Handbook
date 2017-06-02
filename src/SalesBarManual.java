@@ -116,7 +116,11 @@ public class SalesBarManual extends OpsMenu {  //Should this inherit from MenuIt
 	 * Creates a new SalesBarManual.
 	 */
 	public SalesBarManual(final JPanel backMenuScreen, final CardLayout backMenuScreenCl, DBConnect connect) {	
-		super("CUSTOMER PROCEDURES", backMenuScreen, backMenuScreenCl, "ops_main_screen");		
+		super("CUSTOMER PROCEDURES", backMenuScreen, backMenuScreenCl, "ops_main_screen");
+		
+		
+		//If you want to have a button that 
+		
 		MenuItemContent newRepDiaContent = new NewRepDiaContent(this, menuScreenCl, connect);
 		MenuItemContent walkinWOContent = new WalkinWOContent(this, menuScreenCl, connect);
 		MenuItemContent workCmplContent = new WorkCmplContent(this, menuScreenCl, connect);
@@ -163,7 +167,7 @@ public class SalesBarManual extends OpsMenu {  //Should this inherit from MenuIt
 		
 		
 		// === BUTTON AREA CONFIGURATIONS ===
-		btnArea.setLayout(new MigLayout());
+		btnArea.setLayout(new MigLayout("align 50%"));
 		btnArea.setBackground(Color.WHITE);
 		content.add(btnArea, "center, push, growy");		
 		addMainMenuBtns();
